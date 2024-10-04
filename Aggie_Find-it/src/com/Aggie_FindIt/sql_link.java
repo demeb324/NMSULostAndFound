@@ -205,10 +205,5 @@ public class sql_link {
     }
 
     public static void main(String[] args){
-        //System.out.println(login("UserAD", "39fb7f747b9824ca1ea04a491c49dac820f6b2ecac66487bd0536d3248f50d49"));
-        //System.out.println(addItem("nothing","literally nothing","Café","Misc"));
-        //System.out.println(addUser("Student", "NotJon","1234","Cafe"));
-        //System.out.println(removeItem("100"));
-        //System.out.println(editItem("6","","lit nada","Corbett Room 214",""));
     }
 }
