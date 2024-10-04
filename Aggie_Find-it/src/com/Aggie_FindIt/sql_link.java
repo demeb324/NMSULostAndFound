@@ -11,7 +11,7 @@ public class sql_link {
     // 0 for user not found 1 for password incorrect 2 for all good
     public static int login(String userName, String passHash) {
         try{
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/CS_371", "root", "wucdEj-dotzo6-qapgih");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/CS_371", "user", "password");
             Statement stmt = connection.createStatement();
             ResultSet res = stmt.executeQuery("SELECT * FROM AdminUser A, StudentUser S \n WHERE A.username = \"" + userName + "\" or S.username = \"" + userName + "\"");
 
@@ -38,7 +38,7 @@ public class sql_link {
     public static String itemSearch(String item_name, String description, String building, String category){
 
         try{
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/CS_371", "root", "wucdEj-dotzo6-qapgih");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/CS_371", "user", "password");
             Statement stmt = connection.createStatement();
 
             StringBuilder query = new StringBuilder();
@@ -91,7 +91,7 @@ public class sql_link {
     //adds item, True if success, False if fail
     public static boolean addItem(String item_name, String description, String building, String category){
         try{
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/CS_371", "root", "wucdEj-dotzo6-qapgih");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/CS_371", "user", "password");
             Statement stmt = connection.createStatement();
 
             StringBuilder query = new StringBuilder();
@@ -116,7 +116,7 @@ public class sql_link {
     //adds User, True if success, False if fail
     public static boolean addUser(String user_type, String username, String password_hash, String email_or_location){
         try{
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/CS_371", "root", "wucdEj-dotzo6-qapgih");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/CS_371", "user", "password");
             Statement stmt = connection.createStatement();
 
             StringBuilder query = new StringBuilder();
@@ -142,7 +142,7 @@ public class sql_link {
     // Removes item from database, true if success, false if not
     public static boolean removeItem(String item_id){
         try{
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/CS_371", "root", "wucdEj-dotzo6-qapgih");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/CS_371", "user", "password");
             Statement stmt = connection.createStatement();
 
             StringBuilder query = new StringBuilder();
@@ -161,7 +161,7 @@ public class sql_link {
     //adds item, True if success, False if fail
     public static boolean editItem(String item_id, String item_name, String description, String building, String category) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/CS_371", "root", "wucdEj-dotzo6-qapgih");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/CS_371", "user", "password");
             Statement stmt = connection.createStatement();
 
             StringBuilder query = new StringBuilder();
