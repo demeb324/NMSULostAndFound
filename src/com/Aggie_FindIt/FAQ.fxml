@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to bottom, #941853, #6A1237);"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.Aggie_FindIt.FAQPageController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Frequently Asked Questions" style="-fx-font-size: 24px; -fx-text-fill: white;"/>
+    
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+        <VBox spacing="10" style="-fx-background-color: transparent;">
+            <Label text="Q: How do I report a lost item?" style="-fx-font-weight: bold; -fx-text-fill: black;"/>
+            <Label text="A: Log in to your account and click on 'Report Lost Item' to fill out the form." wrapText="true" style="-fx-text-fill: black;"/>
+            
+            <Label text="Q: How long do you keep found items?" style="-fx-font-weight: bold; -fx-text-fill: black;"/>
+            <Label text="A: To be decided!" wrapText="true" style="-fx-text-fill: black;"/>
+        </VBox>
+    </ScrollPane>
+    
+    <Button text="Back to Home" onAction="#backToHome" style="-fx-background-color: #6c757d; -fx-text-fill: white;"/>
+</VBox>

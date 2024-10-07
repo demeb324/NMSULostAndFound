@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to bottom, #941853, #6A1237);"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.Aggie_FindIt.SignUpPageController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Sign Up" style="-fx-font-size: 24px; -fx-text-fill: white;"/>
+    
+    <TextField promptText="Full Name" maxWidth="300"/>
+    <TextField promptText="Email" maxWidth="300"/>
+    <PasswordField promptText="Password" maxWidth="300"/>
+    <PasswordField promptText="Confirm Password" maxWidth="300"/>
+    
+    <Button text="Sign Up" onAction="#signUp" style="-fx-background-color: #28A745; -fx-text-fill: white;"/>
+    
+    <Button text="Back to Home" onAction="#backToHome" style="-fx-background-color: #6c757d; -fx-text-fill: white;"/>
+</VBox>
