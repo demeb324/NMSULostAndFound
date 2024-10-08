@@ -95,7 +95,6 @@ public class sql_link {
             Statement stmt = connection.createStatement();
 
             StringBuilder query = new StringBuilder();
-            boolean and = false;
 
             query.append("INSERT INTO CS_371.Items (item_name, description, building, category) VALUES ( ");
             query.append("\"" + item_name + "\", ");
