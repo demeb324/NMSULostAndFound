@@ -8,8 +8,6 @@ import javafx.scene.text.TextFlow;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import static com.Aggie_FindIt.sql_link.*;
-
 public class Aggie_FindIt extends Application {
     @Override
     public void start(Stage stage) {
