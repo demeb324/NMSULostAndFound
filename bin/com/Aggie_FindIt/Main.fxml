@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to bottom, #941853, #6A1237);"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.Aggie_FindIt.MainPageController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <VBox alignment="CENTER" spacing="10">
+        <Label text="Welcome to Aggie Find-it!" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+        <Label text="Your One-Stop Hub for Lost &amp; Found Made Simple!" style="-fx-font-size: 22px; -fx-text-fill: white;" wrapText="true" textAlignment="CENTER"/>
+    </VBox>
+
+    <VBox alignment="CENTER" spacing="15">
+        <Button text="Login" style="-fx-background-color: #007BFF; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-width: 200px;" onAction="#openLoginPage"/>
+        <Button text="Sign Up" style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-width: 200px;" onAction="#openSignUpPage"/>
+    </VBox>
+
+    <HBox alignment="CENTER" spacing="15">
+        <Button text="About" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-width: 120px;" onAction="#openAboutPage"/>
+        <Button text="Contact Us" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-width: 120px;" onAction="#openContactPage"/>
+        <Button text="FAQ" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-width: 120px;" onAction="#openFAQPage"/>
+    </HBox>
+</VBox>

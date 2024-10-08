@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to bottom, #941853, #6A1237);"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.Aggie_FindIt.AboutPageController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="About Aggie Find-it" style="-fx-font-size: 24px; -fx-text-fill: white;"/>
+    
+    <TextArea wrapText="true" editable="false" style="-fx-background-color: transparent; -fx-text-fill: black;">
+        Aggie Find-it is a platform designed to help the New Mexico State University community easily report and find lost items. 
+        Our mission is to simplify the process of reuniting lost belongings with their rightful owners. Go Aggies!
+    </TextArea>
+    
+    <Button text="Back to Home" onAction="#backToHome" style="-fx-background-color: #6c757d; -fx-text-fill: white;"/>
+</VBox>
