@@ -20,7 +20,11 @@ public class LoginPageController {
 
     @FXML
     private void login() {
+        String username = usernameField.getText();
         // Implement login logic here
-        System.out.println("Login attempted with username: " + usernameField.getText());
+        System.out.println("Login attempted with username: " + username);
+
+        //PRELIMIARY LOAD OF ADMIN PAGE TO LOAD 
+        Aggie_FindIt.loadPage("Admin.fxml");
     }
 }
