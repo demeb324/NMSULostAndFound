@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
-import java.io.IOException;
 
 public class Aggie_FindIt extends Application {
     private static Stage primaryStage;
