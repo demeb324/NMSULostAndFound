@@ -6,13 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Aggie_FindIt",
+            "request": "launch",
+            "mainClass": "Aggie_FindIt",
+            "projectName": "Aggie_FindIt"
+        },
+        {
+            "type": "java",
             "name": "Launch JavaFX",
             "request": "launch",
             "mainClass": "Main",
             "vmArgs": "--module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules=javafx.controls,javafx.fxml",
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal"
-          }
+        }
     ]
 }
 

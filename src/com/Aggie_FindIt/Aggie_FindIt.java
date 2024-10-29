@@ -1,13 +1,12 @@
 package com.Aggie_FindIt;
 
+import java.net.URL;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.net.URL;
-import java.io.IOException;
 
 public class Aggie_FindIt extends Application {
     private static Stage primaryStage;
@@ -69,3 +68,21 @@ public class Aggie_FindIt extends Application {
 
 //javac --module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules=javafx.controls,javafx.fxml com/Aggie_FindIt/*.java
 //java --module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules=javafx.base,javafx.graphics,javafx.controls,javafx.fxml -cp . com.Aggie_FindIt.Aggie_FindIt
+
+
+//javac --module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules=javafx.controls,javafx.fxml com/Aggie_FindIt/*.java
+
+//this seems to work for me to run the program from the terminal, lmk if it works:
+
+
+//javac --module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules javafx.controls,javafx.graphics,javafx.media,javafx.fxml -cp lib/mongodb-driver-sync-5.2.0.jar:lib/mongodb-driver-core-5.2.0.jar:lib/bson-5.2.0.jar:lib/bson-record-codec-5.2.0.jar src/com/Aggie_FindIt/*.java
+
+
+//cd src
+
+
+//java --module-path <sdkpath>/lib --add-modules javafx.base,javafx.graphics,javafx.controls,javafx.fxml -cp .:<absolute_paths to bson-5.2.0.jar, bson-record-codec-5.2.0.jar, mongodb-driver-core-5.2.0.jar, mongodb-driver-sync-5.2.0.jar()seperated by ":"> com.Aggie_FindIt.Aggie_FindIt
+
+
+//javac --module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules javafx.controls,javafx.graphics,javafx.media,javafx.fxml  -cp .;lib/mongodb-driver-sync-5.2.0.jar;lib/mongodb-driver-core-5.2.0.jar;lib/bson-5.2.0.jar;lib/bson-record-codec-5.2.0.jar src/com/Aggie_FindIt/*.java
+//javac --module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules javafx.controls,javafx.graphics,javafx.media,javafx.fxml  -cp .;lib/mongodb-driver-sync-5.2.0.jar;lib/mongodb-driver-core-5.2.0.jar;lib/bson-5.2.0.jar;lib/bson-record-codec-5.2.0.jar C:/Users/deyru/javafx-sdk-23/src/com/Aggie_FindIt/*.java
