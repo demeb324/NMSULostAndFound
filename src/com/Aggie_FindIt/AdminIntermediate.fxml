@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #981853;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Aggie_FindIt.AdminIntermediatePageController">
+   <children>
+      <Label text="Please indicate what building you are located at today" textFill="#fffefe" translateY="-20.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="buildingsDropdown" prefWidth="150.0" />
+      <Button mnemonicParsing="false" text="Submit " translateY="20.0" onAction="#submit" />
+      <TextArea prefHeight="83.0" prefWidth="600.0" text="Placeholder for procedure reminders" translateY="80.0">
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </TextArea>
+   </children>
+</VBox>
