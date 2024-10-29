@@ -37,6 +37,7 @@ public class LoginPageController {
                 alert.setHeaderText(null);
                 alert.setContentText("Login successful for Admin: " + usernameField.getText());
                 alert.show();
+                Aggie_FindIt.loadPage("Admin.fxml");
                 break;
             case 1:
                 alert.setTitle("Fail");

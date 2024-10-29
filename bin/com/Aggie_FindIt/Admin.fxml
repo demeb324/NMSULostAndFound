@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to bottom, #941853, #6A1237);"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.Aggie_FindIt.AdminPageController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+</VBox>
