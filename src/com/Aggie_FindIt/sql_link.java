@@ -21,7 +21,7 @@ public class sql_link{
 
     private static String loadDatabasePassword() {
         Properties properties = new Properties();
-        try (InputStream input = new FileInputStream(".secrets/dbsecret.properties")) {
+        try (InputStream input = new FileInputStream("dbsecret.properties")) {
             properties.load(input);
             return properties.getProperty("db_password");
         } catch (IOException e) {
