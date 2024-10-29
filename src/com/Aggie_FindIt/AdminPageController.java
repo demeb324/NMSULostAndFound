@@ -18,16 +18,25 @@ public class AdminPageController implements Initializable{
     private ChoiceBox<String> itemCategory;
 
     @FXML
-    private Label itemCategoryLabel, itemDateLabel;
+    private Label itemCategoryLabel; 
+    
+    @FXML
+    private Label itemDateLabel;
 
     @FXML
     private DatePicker itemDate;
 
     @FXML
-    private TextField itemDescription, itemColor; 
+    private TextField itemDescription;
+
+    @FXML
+    private TextField itemColor; 
 
     @FXML 
-    private Button completeReturn, cancelReturn;
+    private Button completeReturn;
+    
+    @FXML
+    private Button cancelReturn;
 
     @FXML
     private TextArea returnText;
