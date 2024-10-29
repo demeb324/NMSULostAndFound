@@ -23,9 +23,9 @@
         </columns>
     </TableView>
 
-    <Button text="Reqest Item" style="-fx-background-color: #007BFF; -fx-text-fill: white;"/>
+    <Button text="Reqest Item" onAction="#requestItem" style="-fx-background-color: #007BFF; -fx-text-fill: white;"/>
     
-    <Button text="Where to go?" style="-fx-background-color: #6c757d; -fx-text-fill: white;"/>
+    <Button text="Where to go?" onAction="#whereToGo" style="-fx-background-color: #6c757d; -fx-text-fill: white;"/>
 
     <Button text="Logout" onAction="#logout" style="-fx-background-color: #6c757d; -fx-text-fill: white;"/>
 

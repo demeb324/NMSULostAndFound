@@ -63,13 +63,13 @@ public class StudentPageController {
     @FXML
     private void requestItem() {
         System.out.println("requestItem method called");
-        Aggie_FindIt.loadPage("requestItemPage.xml");
+        Aggie_FindIt.loadPage("requestItem.fsxml");
     }
 
 
     @FXML
     private void whereToGo() {
         System.out.println("whereToGo method called");
-        Aggie_FindIt.loadPage("whereToGoPage.xml");
+        Aggie_FindIt.loadPage("WhereToGo.fxml");
     }
 }
