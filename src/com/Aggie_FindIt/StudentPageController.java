@@ -63,7 +63,7 @@ public class StudentPageController {
     @FXML
     private void requestItem() {
         System.out.println("requestItem method called");
-        Aggie_FindIt.loadPage("requestItem.fxml");
+        Aggie_FindIt.loadPage("RequestItem.fxml");
     }
 
 
