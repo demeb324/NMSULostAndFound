@@ -22,5 +22,6 @@ public class LoginPageController {
     private void login() {
         // Implement login logic here
         System.out.println("Login attempted with username: " + usernameField.getText());
+        Aggie_FindIt.loadPage("StudentPage.fxml");
     }
 }
