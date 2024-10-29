@@ -1,2 +1,3 @@
 # ignoring all the class files
 *.class
+.secret

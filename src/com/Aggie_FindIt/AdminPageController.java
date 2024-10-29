@@ -1,8 +1,5 @@
 package com.Aggie_FindIt;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,25 +15,16 @@ public class AdminPageController implements Initializable{
     private ChoiceBox<String> itemCategory;
 
     @FXML
-    private Label itemCategoryLabel; 
-    
-    @FXML
-    private Label itemDateLabel;
+    private Label itemCategoryLabel, itemDateLabel;
 
     @FXML
     private DatePicker itemDate;
 
     @FXML
-    private TextField itemDescription;
-
-    @FXML
-    private TextField itemColor; 
+    private TextField itemDescription, itemColor; 
 
     @FXML 
-    private Button completeReturn;
-    
-    @FXML
-    private Button cancelReturn;
+    private Button completeReturn, cancelReturn;
 
     @FXML
     private TextArea returnText;
@@ -47,37 +35,6 @@ public class AdminPageController implements Initializable{
     private void logout() {
         System.out.println("Returning to home page from Admin page");
         Aggie_FindIt.loadMainPage();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        itemCategory.getItems().addAll(categories);
-    }
-
-    @FXML
-    private void addItem() {
-        itemDescription.setDisable(false);
-        itemColor.setDisable(false);
-        itemCategory.setDisable(false);
-        itemCategoryLabel.setDisable(false);
-        itemDate.setDisable(false);
-        itemDateLabel.setDisable(false);
-        completeReturn.setDisable(true);
-        cancelReturn.setDisable(true);
-        returnText.setDisable(true);
-    }
-
-    @FXML
-    private void itemReturn() {
-        itemDescription.setDisable(true);
-        itemColor.setDisable(true);
-        itemCategory.setDisable(true);
-        itemCategoryLabel.setDisable(true);
-        itemDate.setDisable(true);
-        itemDateLabel.setDisable(true);
-        completeReturn.setDisable(false);
-        cancelReturn.setDisable(false);
-        returnText.setDisable(false);
     }
     
 }
