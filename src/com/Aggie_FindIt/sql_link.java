@@ -1,9 +1,13 @@
 package com.Aggie_FindIt;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Properties;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;

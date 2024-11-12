@@ -34,5 +34,9 @@
         <Label style="-fx-font-size: 16px; -fx-text-fill: white;" text="Email: support@aggiefindit.com" />
     </VBox>
     
+    <!-- Go Back Button -->
+    <Button onAction="#goBack" style="-fx-background-color: #6c757d; -fx-text-fill: white;" text="Go Back" />
+    
+    <!-- Back to Home Button -->
     <Button onAction="#backToHome" style="-fx-background-color: #6c757d; -fx-text-fill: white;" text="Back to Home" />
 </VBox>

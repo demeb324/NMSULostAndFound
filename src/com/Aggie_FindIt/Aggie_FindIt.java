@@ -22,6 +22,19 @@ public class Aggie_FindIt extends Application {
         loadPage("Main.fxml");
     }
 
+    public static void loadRequestItemPage() {
+        loadPage("RequestItem.fxml");
+    }
+
+    public static void loadStudentPage() {
+        loadPage("StudentPage.fxml");
+    }
+
+    public static void loadAdminPage() {
+        loadPage("Admin.fxml");
+    }
+
+
     public static void loadPage(String fxmlFile) {
         System.out.println("Attempting to load: " + fxmlFile);
         try {

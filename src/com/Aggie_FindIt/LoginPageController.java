@@ -29,14 +29,11 @@ public class LoginPageController {
             case 3:
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
-                alert.setContentText("Login successful for Student: " + usernameField.getText());
-                alert.show();
+                Aggie_FindIt.loadPage("StudentPage.fxml");
                 break;
             case 2:
                 alert.setTitle("Success");
                 alert.setHeaderText(null);
-                alert.setContentText("Login successful for Admin: " + usernameField.getText());
-                alert.show();
                 Aggie_FindIt.loadPage("Admin.fxml");
                 break;
             case 1:
