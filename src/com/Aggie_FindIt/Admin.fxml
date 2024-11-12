@@ -2,11 +2,14 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -27,7 +30,7 @@
             <HBox minWidth="41.0" prefHeight="40.0" prefWidth="435.0" />
             <HBox minWidth="41.0" prefHeight="40.0" prefWidth="435.0" />
             <HBox minWidth="41.0" prefHeight="40.0" prefWidth="435.0" />
-          <Button mnemonicParsing="false" text="Logout" textAlignment="RIGHT" />
+          <Button mnemonicParsing="false" onAction="#logout" text="Logout" textAlignment="RIGHT" />
         </buttons>
       </ButtonBar>
     <SplitPane dividerPositions="0.1475501113585746, 0.7511135857461024" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
@@ -42,19 +45,30 @@
                 <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
               </textFill>
             </Label>
-                  <Button layoutX="24.0" layoutY="83.0" mnemonicParsing="false" text="Item Return" />
-                  <Button layoutX="28.0" layoutY="144.0" mnemonicParsing="false" text="Item Input" />
-                  <Button layoutX="21.0" layoutY="51.0" mnemonicParsing="false" text="Item Request" />
-                  <Button layoutX="23.0" layoutY="114.0" mnemonicParsing="false" text="Item lookup" />
+                  <Button layoutX="24.0" layoutY="83.0" mnemonicParsing="false" onAction="#itemReturn" text="Item Return" />
+                  <Button layoutX="28.0" layoutY="144.0" mnemonicParsing="false" onAction="#addItem" text="Add Item" />
+                  <Button layoutX="21.0" layoutY="51.0" mnemonicParsing="false" text="Item Requests" />
+                  <Button layoutX="23.0" layoutY="114.0" mnemonicParsing="false" onAction="#itemSearch" text="Item lookup" />
           </children>
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
           <content>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="534.0">
+            <AnchorPane id="Content" fx:id="middlePane" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="534.0">
               <children>
                 <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Main" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                        <Button layoutX="377.0" layoutY="516.0" mnemonicParsing="false" text="Procedure Reminder" />
-                        <ImageView fitHeight="278.0" fitWidth="371.0" layoutX="78.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <TextField fx:id="itemDescription" disable="true" layoutX="16.0" layoutY="132.0" prefHeight="70.0" prefWidth="504.0" promptText="Item description" />
+                        <TextField fx:id="itemColor" disable="true" layoutX="193.0" layoutY="86.0" promptText="Item Color" />
+                        <ChoiceBox fx:id="itemCategory" disable="true" layoutX="15.0" layoutY="86.0" prefWidth="150.0" />
+                        <Label fx:id="itemCategoryLabel" disable="true" layoutX="15.0" layoutY="69.0" text="Category" />
+                        <DatePicker fx:id="itemDate" disable="true" layoutX="353.0" layoutY="86.0" />
+                        <Label fx:id="itemDateLabel" disable="true" layoutX="353.0" layoutY="69.0" text="Day turned in" />
+                        <TextArea fx:id="returnText" disable="true" layoutX="21.0" layoutY="66.0" prefHeight="125.0" prefWidth="493.0" text="Please refer yourself to the Procedure Reminder below this for the&#10;correct procedure when returning an item.&#10;&#10;BEFORE HANDING ITEM OVER: if it is deemed that a return is in order, please click&#10;complete return, which will redirect you to the search item page. Search for the item,&#10;and only then hand it over to the student. MAKE SURE ITEM IS REMOVED. &#10;" />
+                        <Button fx:id="completeReturn" disable="true" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" onAction="#itemSearch" prefHeight="25.0" prefWidth="130.0" text="Completed return" />
+                        <Button fx:id="cancel" disable="true" layoutX="173.0" layoutY="215.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+                        <Button fx:id="addItem" disable="true" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" onAction="#submitItem" prefHeight="25.0" prefWidth="130.0" text="Add item" />
+                        <TextField fx:id="itemSearchName" disable="true" layoutX="185.0" layoutY="86.0" promptText="item name" />
+                        <Button fx:id="searchButton" disable="true" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Search item" />
+                        <TextArea fx:id="procedure" disable="true" layoutX="21.0" layoutY="261.0" prefHeight="224.0" prefWidth="492.0" text="To return an item: &#10;&#10;1. Make sure the item is in storage&#10; &#10;2. Once complete, using item description and information, ask students questions about &#10;the item to make sure it is theirs. &#10;&#10;3. Once it is made sure they know the item, if applicable, do one of the following to verify&#10;ownership:&#10; -Ask them to unlock the electronic device&#10; -If no password is needed for the device, ask if it is possible to provide receipts of &#10;  purchase" />
               </children>
             </AnchorPane>
           </content>
