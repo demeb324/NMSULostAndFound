@@ -1,5 +1,6 @@
 package com.Aggie_FindIt;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -11,7 +12,42 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Alert;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import static com.Aggie_FindIt.sql_link.*;
+
 public class AdminPageController implements Initializable{
+    @FXML
+    private TableView<ObservableList<String>> logTableView;
+    @FXML
+    private TableColumn<ObservableList<String>, String> itemNameColumn, descriptionColumn, buildingColumn, categoryColumn, timeColumn;
+    @FXML
+    private Button reloadButton; 
+
+    private ObservableList<ObservableList<String>> logEntries = FXCollections.observableArrayList();
+
+
+    @FXML
+    private Label itemCategoryLabel, itemDateLabel;
+    @FXML
+    private DatePicker itemDate;
+    @FXML
+    private TextField itemDescription, itemColor, itemSearchName; 
+    @FXML 
+    private Button completeReturn, cancel, addItem,searchButton;
+    @FXML
+    private AnchorPane middlePane;
+    @FXML
+
+    private ComboBox<String> categoryField;
+  
     @FXML
     private ChoiceBox<String> itemCategory;
     @FXML
@@ -27,6 +63,7 @@ public class AdminPageController implements Initializable{
     @FXML
     private TextArea returnText, procedure;
     private String[] categories = {"Phone", "Tablet", "Computer", "School supply", "Personal Item"};
+
 
     @FXML
     private void logout() {
@@ -51,7 +88,111 @@ public class AdminPageController implements Initializable{
         searchButton.setOpacity(0);
         procedure.setOpacity(0);
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        addItem.setOpacity(0);
+        itemDescription.setOpacity(0);
+        itemColor.setOpacity(0);
+        itemCategory.setOpacity(0);
+        itemCategoryLabel.setOpacity(0);
+        itemDate.setOpacity(0);
+        itemDateLabel.setOpacity(0);
+        completeReturn.setOpacity(0);
+        cancel.setOpacity(0);
+        returnText.setOpacity(0);
+        itemCategory.getItems().addAll(categories);
+
+        itemSearchName.setOpacity(0);
+        searchButton.setOpacity(0);
+        procedure.setOpacity(0);
+  
+        logTableView.setItems(logEntries);
+
+        // Set up column value factories to display data in each column
+        itemNameColumn.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(0)));
+        descriptionColumn.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(1)));
+        buildingColumn.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(2)));
+        categoryColumn.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(3)));
+        timeColumn.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(4))); // For time
+        
+        updateLog();
+        reloadButton.setOnAction(event -> updateLog());
+
     }
+    @FXML
+    private void itemReturn() {
+        cancel();
+        completeReturn.setDisable(false);
+        completeReturn.setOpacity(100);
+        cancel.setDisable(false);
+        cancel.setOpacity(100);
+        returnText.setDisable(true);
+        returnText.setOpacity(100);
+        procedure.setOpacity(100);
+    }
+
+    @FXML
+    private void showItemInputForm() {
+        cancel();
+        itemInputForm.setVisible(true);
+    }
+
+    @FXML
+    private void itemSearch() {
+        cancel();
+        itemDescription.setDisable(false);
+        itemDescription.setOpacity(100);
+        itemCategory.setDisable(false);
+        itemCategory.setOpacity(100);
+        itemCategoryLabel.setDisable(false);
+        itemCategoryLabel.setOpacity(100);
+        cancel.setDisable(false);
+        cancel.setOpacity(100);
+        itemSearchName.setDisable(false);
+        itemSearchName.setOpacity(100);
+        searchButton.setDisable(false);
+        searchButton.setOpacity(100);
+    }
+
+    @FXML
+    private void handleSubmitItem() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        String itemName = itemNameField.getText();
+        String description = descriptionField.getText();
+        String building = buildingField.getValue();
+        String category = categoryField.getValue();
+
+        if (itemName.isEmpty() || description.isEmpty() || category == null || building == null) {
+            alert.setTitle("Missing Information");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill out all fields.");
+            alert.show();
+            return;
+        }
+
+        // Attempt to add the item to the database
+        boolean success = sql_link.addItem(itemName, description, building, category);
+
+        if (success) {
+            alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("Item added successfully!");
+            alert.show();
+            clearItemInputForm();
+            itemInputForm.setVisible(false);
+        } else {
+            alert.setTitle("Failure");
+            alert.setHeaderText(null);
+            alert.setContentText("Failed to add item. Please try again.");
+            alert.show();
+        }
+    }
+
+    private void clearItemInputForm() {
+        itemNameField.clear();
+        descriptionField.clear();
+    }
+
     @FXML
     private void addItem() {
         cancel();
@@ -111,6 +252,7 @@ public class AdminPageController implements Initializable{
         searchButton.setDisable(true);
         searchButton.setOpacity(0);
         procedure.setOpacity(0);
+        itemInputForm.setVisible(false);
     }
 
     @FXML
@@ -131,8 +273,6 @@ public class AdminPageController implements Initializable{
     }
 
     @FXML
-    private void submitItem(){
-    }
-
+    private void submitItem() {}
 
 }

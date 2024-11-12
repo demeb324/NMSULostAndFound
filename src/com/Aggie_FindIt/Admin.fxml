@@ -46,29 +46,73 @@
               </textFill>
             </Label>
                   <Button layoutX="24.0" layoutY="83.0" mnemonicParsing="false" onAction="#itemReturn" text="Item Return" />
-                  <Button layoutX="28.0" layoutY="144.0" mnemonicParsing="false" onAction="#addItem" text="Add Item" />
+                  <Button layoutX="28.0" layoutY="144.0" mnemonicParsing="false" text="Add Item" onAction="#showItemInputForm"/>
                   <Button layoutX="21.0" layoutY="51.0" mnemonicParsing="false" text="Item Requests" />
                   <Button layoutX="23.0" layoutY="114.0" mnemonicParsing="false" onAction="#itemSearch" text="Item lookup" />
           </children>
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
           <content>
-            <AnchorPane id="Content" fx:id="middlePane" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="534.0">
+
+          <AnchorPane id="Content" fx:id="middlePane" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="534.0">
               <children>
                 <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Main" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                        <TextField fx:id="itemDescription" disable="true" layoutX="16.0" layoutY="132.0" prefHeight="70.0" prefWidth="504.0" promptText="Item description" />
-                        <TextField fx:id="itemColor" disable="true" layoutX="193.0" layoutY="86.0" promptText="Item Color" />
-                        <ChoiceBox fx:id="itemCategory" disable="true" layoutX="15.0" layoutY="86.0" prefWidth="150.0" />
-                        <Label fx:id="itemCategoryLabel" disable="true" layoutX="15.0" layoutY="69.0" text="Category" />
-                        <DatePicker fx:id="itemDate" disable="true" layoutX="353.0" layoutY="86.0" />
-                        <Label fx:id="itemDateLabel" disable="true" layoutX="353.0" layoutY="69.0" text="Day turned in" />
-                        <TextArea fx:id="returnText" disable="true" layoutX="21.0" layoutY="66.0" prefHeight="125.0" prefWidth="493.0" text="Please refer yourself to the Procedure Reminder below this for the&#10;correct procedure when returning an item.&#10;&#10;BEFORE HANDING ITEM OVER: if it is deemed that a return is in order, please click&#10;complete return, which will redirect you to the search item page. Search for the item,&#10;and only then hand it over to the student. MAKE SURE ITEM IS REMOVED. &#10;" />
-                        <Button fx:id="completeReturn" disable="true" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" onAction="#itemSearch" prefHeight="25.0" prefWidth="130.0" text="Completed return" />
-                        <Button fx:id="cancel" disable="true" layoutX="173.0" layoutY="215.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
-                        <Button fx:id="addItem" disable="true" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" onAction="#submitItem" prefHeight="25.0" prefWidth="130.0" text="Add item" />
-                        <TextField fx:id="itemSearchName" disable="true" layoutX="185.0" layoutY="86.0" promptText="item name" />
-                        <Button fx:id="searchButton" disable="true" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Search item" />
-                        <TextArea fx:id="procedure" disable="true" layoutX="21.0" layoutY="261.0" prefHeight="224.0" prefWidth="492.0" text="To return an item: &#10;&#10;1. Make sure the item is in storage&#10; &#10;2. Once complete, using item description and information, ask students questions about &#10;the item to make sure it is theirs. &#10;&#10;3. Once it is made sure they know the item, if applicable, do one of the following to verify&#10;ownership:&#10; -Ask them to unlock the electronic device&#10; -If no password is needed for the device, ask if it is possible to provide receipts of &#10;  purchase" />
+                  <TextField fx:id="itemDescription" disable="true" layoutX="16.0" layoutY="132.0" prefHeight="70.0" prefWidth="504.0" promptText="Item description" />
+                  <TextField fx:id="itemColor" disable="true" layoutX="193.0" layoutY="86.0" promptText="Item Color" />
+                  <ChoiceBox fx:id="itemCategory" disable="true" layoutX="15.0" layoutY="86.0" prefWidth="150.0" />
+                  <Label fx:id="itemCategoryLabel" disable="true" layoutX="15.0" layoutY="69.0" text="Category" />
+                  <DatePicker fx:id="itemDate" disable="true" layoutX="353.0" layoutY="86.0" />
+                  <Label fx:id="itemDateLabel" disable="true" layoutX="353.0" layoutY="69.0" text="Day turned in" />
+                  <TextArea fx:id="returnText" disable="true" layoutX="21.0" layoutY="66.0" prefHeight="125.0" prefWidth="493.0" text="Please refer yourself to the Procedure Reminder below this for the&#10;correct procedure when returning an item.&#10;&#10;BEFORE HANDING ITEM OVER: if it is deemed that a return is in order, please click&#10;complete return, which will redirect you to the search item page. Search for the item,&#10;and only then hand it over to the student. MAKE SURE ITEM IS REMOVED. &#10;" />
+                  <Button fx:id="completeReturn" disable="true" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" onAction="#itemSearch" prefHeight="25.0" prefWidth="130.0" text="Completed return" />
+                  <Button fx:id="cancel" disable="true" layoutX="173.0" layoutY="215.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+                  <Button fx:id="addItem" disable="true" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" onAction="#submitItem" prefHeight="25.0" prefWidth="130.0" text="Add item" />
+                  <TextField fx:id="itemSearchName" disable="true" layoutX="185.0" layoutY="86.0" promptText="item name" />
+                  <Button fx:id="searchButton" disable="true" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Search item" />
+                  <TextArea fx:id="procedure" disable="true" layoutX="21.0" layoutY="261.0" prefHeight="224.0" prefWidth="492.0" text="To return an item: &#10;&#10;1. Make sure the item is in storage&#10; &#10;2. Once complete, using item description and information, ask students questions about &#10;the item to make sure it is theirs. &#10;&#10;3. Once it is made sure they know the item, if applicable, do one of the following to verify&#10;ownership:&#10; -Ask them to unlock the electronic device&#10; -If no password is needed for the device, ask if it is possible to provide receipts of &#10;  purchase" />
+            <VBox fx:id="itemInputForm" layoutX="50.0" layoutY="80.0" spacing="5" alignment="CENTER" visible="false">
+                  <Label text="Add New Item"/>
+                  <HBox>
+                      <Label text="Item Name:"/>
+                      <TextField fx:id="itemNameField"/>
+                  </HBox>
+                  <HBox>
+                      <Label text="Description:"/>
+                      <TextField fx:id="descriptionField"/>
+                  </HBox>
+                  <HBox>
+                      <Label text="Building:"/>
+                      <ComboBox fx:id="buildingField">
+                          <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Library"/>
+                                  <String fx:value="Cafeteria"/>
+                                  <String fx:value="Gym"/>
+                                  <String fx:value="Classroom"/>
+                                  <String fx:value="Dormitory"/>
+                                  <String fx:value="Other"/>
+                              </FXCollections>
+                          </items>
+                      </ComboBox>
+                  </HBox>
+                  <HBox>
+                      <Label text="Category:"/>
+                      <ComboBox fx:id="categoryField">
+                          <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Electronics"/>
+                                  <String fx:value="Clothing"/>
+                                  <String fx:value="Books"/>
+                                  <String fx:value="Keys"/>
+                                  <String fx:value="Accessories"/>
+                                  <String fx:value="Others"/>
+                              </FXCollections>
+                          </items>
+                      </ComboBox>
+                  </HBox>
+                  <Button text="Submit" onAction="#handleSubmitItem"/>
+                  <Button text="Cancel" onAction="#handleCancelItemInput"/>
+                </VBox>
               </children>
             </AnchorPane>
           </content>
