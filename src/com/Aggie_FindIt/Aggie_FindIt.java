@@ -79,5 +79,5 @@ public class Aggie_FindIt extends Application {
 //commands to run the program; change the path to the javafx-sdk-23 folder on your computer properly
 //need to write a makefile later on
 
-//javac --module-path "C:/Users/deyru/javafx-sdk-23/lib" --add-modules javafx.controls,javafx.graphics,javafx.media,javafx.fxml -cp "../lib/mongodb-driver-sync-5.2.0.jar;../lib/mongodb-driver-core-5.2.0.jar;../lib/bson-5.2.0.jar;../lib/bson-record-codec-5.2.0.jar" com/Aggie_FindIt/Aggie_FindIt.java
+//javac --module-path "C:/Users/deyru/javafx-sdk-23/lib" --add-modules javafx.controls,javafx.graphics,javafx.media,javafx.fxml -cp "../lib/mongodb-driver-sync-5.2.0.jar;../lib/mongodb-driver-core-5.2.0.jar;../lib/bson-5.2.0.jar;../lib/bson-record-codec-5.2.0.jar" com/Aggie_FindIt/*.java
 //java --module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules javafx.controls,javafx.graphics,javafx.media,javafx.fxml -cp "lib/mongodb-driver-sync-5.2.0.jar;..lib/mongodb-driver-core-5.2.0.jar;..lib/bson-5.2.0.jar;..lib/bson-record-codec-5.2.0.jar" -cp . com.Aggie_FindIt.Aggie_FindIt
