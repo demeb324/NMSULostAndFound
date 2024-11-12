@@ -20,9 +20,9 @@
     <TextField fx:id="emailField" maxWidth="300" promptText="Your Email" />
     <TextField fx:id="itemNameField" maxWidth="300" promptText="Item Name" />
     <TextArea fx:id="itemDescriptionArea" maxWidth="300" prefRowCount="5" promptText="Item Description" />
-   <ComboBox prefHeight="25.0" prefWidth="301.0" promptText="Category" visibleRowCount="5" />
-   <ComboBox prefHeight="25.0" prefWidth="301.0" promptText="Last Seen Location" visibleRowCount="5" />
-   <ComboBox prefHeight="25.0" prefWidth="301.0" promptText="Last Seen Time" />
+    <ComboBox fx:id="categoryField" prefHeight="25.0" prefWidth="301.0" promptText="Category" visibleRowCount="5" />
+    <ComboBox fx:id="locationField" prefHeight="25.0" prefWidth="301.0" promptText="Last Seen Location" visibleRowCount="5" />
+    <ComboBox fx:id="timeField" prefHeight="25.0" prefWidth="301.0" promptText="Last Seen Time" />
     
     <Button onAction="#submitRequest" style="-fx-background-color: #007BFF; -fx-text-fill: white;" text="Submit Request" />
     
@@ -34,5 +34,9 @@
         <Label style="-fx-font-size: 16px; -fx-text-fill: white;" text="Email: support@aggiefindit.com" />
     </VBox>
     
+    <!-- Go Back Button -->
+    <Button onAction="#goBack" style="-fx-background-color: #6c757d; -fx-text-fill: white;" text="Go Back" />
+    
+    <!-- Back to Home Button -->
     <Button onAction="#backToHome" style="-fx-background-color: #6c757d; -fx-text-fill: white;" text="Back to Home" />
 </VBox>

@@ -56,6 +56,14 @@ public class RequestItemController {
         }
     }
 
+    //go back to previous page
+    @FXML
+    private void goBack(){
+        System.out.println("Returning to previous from RequestItem page");
+        Aggie_FindIt.loadStudentPage();
+    }
+
+
     @FXML
     private void backToHome() {
         System.out.println("Returning to home page from SignUp page");
