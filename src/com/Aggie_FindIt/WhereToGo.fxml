@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to bottom, #941853, #6A1237);" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.Aggie_FindIt.MainPageController">
+<VBox alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to bottom, #941853, #6A1237);" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.Aggie_FindIt.WhereToGoPageController">
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
@@ -25,12 +25,12 @@
             <Image url="@../../../resources/images/nmsuMap.jpg_large" />
          </image>
       </ImageView>
-        <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0">
-            <columns>
-                <TableColumn fx:id="buildingColumn" prefWidth="75.0" text="Building" />
-                <TableColumn fx:id="roomNumberColumn" prefWidth="75.0" text="Room Number" />
-            </columns>
-        </TableView>
+        <TableView fx:id="itemTable" prefWidth="400" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="buildingColumn" text="Location" prefWidth="200"/>
+            <TableColumn fx:id="roomColumn" text="room" prefWidth="200"/>
+        </columns>
+    </TableView>
 
     </VBox>
 
