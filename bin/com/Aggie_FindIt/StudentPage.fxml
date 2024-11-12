@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+
+<VBox alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to bottom, #941853, #6A1237);"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="com.Aggie_FindIt.StudentPageController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Student Page" style="-fx-font-size: 24px; -fx-text-fill: white;"/>
+    
+    <!-- TableView for item log -->
+    <TableView fx:id="itemTable" prefWidth="400" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="buildingColumn" text="Location" prefWidth="200"/>
+            <TableColumn fx:id="timeColumn" text="Time" prefWidth="200"/>
+        </columns>
+    </TableView>
+
+    <Button text="Reqest Item" onAction="#requestItem" style="-fx-background-color: #007BFF; -fx-text-fill: white;"/>
+    
+    <Button text="Where to go?" onAction="#whereToGo" style="-fx-background-color: #6c757d; -fx-text-fill: white;"/>
+
+    <Button text="Logout" onAction="#logout" style="-fx-background-color: #6c757d; -fx-text-fill: white;"/>
+
+</VBox>
