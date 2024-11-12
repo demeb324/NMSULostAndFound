@@ -22,6 +22,19 @@ public class Aggie_FindIt extends Application {
         loadPage("Main.fxml");
     }
 
+    public static void loadRequestItemPage() {
+        loadPage("RequestItem.fxml");
+    }
+
+    public static void loadStudentPage() {
+        loadPage("StudentPage.fxml");
+    }
+
+    public static void loadAdminPage() {
+        loadPage("Admin.fxml");
+    }
+
+
     public static void loadPage(String fxmlFile) {
         System.out.println("Attempting to load: " + fxmlFile);
         try {
@@ -66,23 +79,5 @@ public class Aggie_FindIt extends Application {
 //commands to run the program; change the path to the javafx-sdk-23 folder on your computer properly
 //need to write a makefile later on
 
-//javac --module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules=javafx.controls,javafx.fxml com/Aggie_FindIt/*.java
-//java --module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules=javafx.base,javafx.graphics,javafx.controls,javafx.fxml -cp . com.Aggie_FindIt.Aggie_FindIt
-
-
-//javac --module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules=javafx.controls,javafx.fxml com/Aggie_FindIt/*.java
-
-//this seems to work for me to run the program from the terminal, lmk if it works:
-
-
-//javac --module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules javafx.controls,javafx.graphics,javafx.media,javafx.fxml -cp lib/mongodb-driver-sync-5.2.0.jar:lib/mongodb-driver-core-5.2.0.jar:lib/bson-5.2.0.jar:lib/bson-record-codec-5.2.0.jar src/com/Aggie_FindIt/*.java
-
-
-//cd src
-
-
-//java --module-path <sdkpath>/lib --add-modules javafx.base,javafx.graphics,javafx.controls,javafx.fxml -cp .:<absolute_paths to bson-5.2.0.jar, bson-record-codec-5.2.0.jar, mongodb-driver-core-5.2.0.jar, mongodb-driver-sync-5.2.0.jar()seperated by ":"> com.Aggie_FindIt.Aggie_FindIt
-
-
-//javac --module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules javafx.controls,javafx.graphics,javafx.media,javafx.fxml  -cp .;lib/mongodb-driver-sync-5.2.0.jar;lib/mongodb-driver-core-5.2.0.jar;lib/bson-5.2.0.jar;lib/bson-record-codec-5.2.0.jar src/com/Aggie_FindIt/*.java
-//javac --module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules javafx.controls,javafx.graphics,javafx.media,javafx.fxml  -cp .;lib/mongodb-driver-sync-5.2.0.jar;lib/mongodb-driver-core-5.2.0.jar;lib/bson-5.2.0.jar;lib/bson-record-codec-5.2.0.jar C:/Users/deyru/javafx-sdk-23/src/com/Aggie_FindIt/*.java
+//javac --module-path "C:/Users/deyru/javafx-sdk-23/lib" --add-modules javafx.controls,javafx.graphics,javafx.media,javafx.fxml -cp "../lib/mongodb-driver-sync-5.2.0.jar;../lib/mongodb-driver-core-5.2.0.jar;../lib/bson-5.2.0.jar;../lib/bson-record-codec-5.2.0.jar" com/Aggie_FindIt/*.java
+//java --module-path C:/Users/deyru/javafx-sdk-23/lib --add-modules javafx.controls,javafx.graphics,javafx.media,javafx.fxml -cp "lib/mongodb-driver-sync-5.2.0.jar;..lib/mongodb-driver-core-5.2.0.jar;..lib/bson-5.2.0.jar;..lib/bson-record-codec-5.2.0.jar" -cp . com.Aggie_FindIt.Aggie_FindIt
