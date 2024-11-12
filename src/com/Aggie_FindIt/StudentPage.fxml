@@ -23,9 +23,11 @@
         </columns>
     </TableView>
 
-    <Button text="Reqest Item" onAction="#requestItem" style="-fx-background-color: #007BFF; -fx-text-fill: white;"/>
-    
-    <Button text="Where to go?" onAction="#whereToGo" style="-fx-background-color: #6c757d; -fx-text-fill: white;"/>
+    <!-- HBox to make Request Item and Where to go buttons side by side -->
+    <HBox alignment="CENTER" spacing="10">
+        <Button text="Request Item" onAction="#requestItem" style="-fx-background-color: #007BFF; -fx-text-fill: white;"/>
+        <Button text="Where to go?" onAction="#whereToGo" style="-fx-background-color: #6c757d; -fx-text-fill: white;"/>
+    </HBox>
 
     <Button text="Logout" onAction="#logout" style="-fx-background-color: #6c757d; -fx-text-fill: white;"/>
 
