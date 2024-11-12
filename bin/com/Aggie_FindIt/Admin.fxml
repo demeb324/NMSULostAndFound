@@ -8,7 +8,6 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -31,8 +30,7 @@
             <HBox minWidth="41.0" prefHeight="40.0" prefWidth="435.0" />
             <HBox minWidth="41.0" prefHeight="40.0" prefWidth="435.0" />
             <HBox minWidth="41.0" prefHeight="40.0" prefWidth="435.0" />
-          <Button mnemonicParsing="false" text="Logout" textAlignment="RIGHT" />
-          <Button mnemonicParsing="false" text="Logout" textAlignment="RIGHT" onAction="#logout"/>
+          <Button mnemonicParsing="false" onAction="#logout" text="Logout" textAlignment="RIGHT" />
         </buttons>
       </ButtonBar>
     <SplitPane dividerPositions="0.1475501113585746, 0.7511135857461024" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
@@ -58,8 +56,7 @@
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="534.0">
               <children>
                 <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Main" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                        <Button layoutX="377.0" layoutY="516.0" mnemonicParsing="false" text="Procedure Reminder" />
-                        <ImageView fitHeight="278.0" fitWidth="371.0" layoutX="78.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button layoutX="500" layoutY="500" mnemonicParsing="false" text="Procedure Reminder" />
                         <TextField fx:id="itemDescription" disable="true" layoutX="16.0" layoutY="132.0" prefHeight="70.0" prefWidth="504.0" promptText="Item description" />
                         <TextField fx:id="itemColor" disable="true" layoutX="193.0" layoutY="86.0" promptText="Item Color" />
                         <ChoiceBox fx:id="itemCategory" disable="true" layoutX="15.0" layoutY="86.0" prefWidth="150.0" />
@@ -67,8 +64,9 @@
                         <DatePicker fx:id="itemDate" disable="true" layoutX="353.0" layoutY="86.0" />
                         <Label fx:id="itemDateLabel" disable="true" layoutX="353.0" layoutY="69.0" text="Day turned in" />
                         <TextArea fx:id="returnText" disable="true" layoutX="21.0" layoutY="86.0" prefHeight="48.0" prefWidth="493.0" text="Please refer yourself to the Procedure Reminder in the bottom right of this pane for the&#10;correct procedure when returning an item." />
-                        <Button fx:id="completeReturn" disable="true" layoutX="21.0" layoutY="155.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Completed return" />
-                        <Button fx:id="cancelReturn" disable="true" layoutX="178.0" layoutY="155.0" mnemonicParsing="false" text="Cancel" />
+                        <Button fx:id="completeReturn" disable="true" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Completed return" />
+                        <Button fx:id="cancel" disable="true" layoutX="173.0" layoutY="215.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+                        <Button fx:id="addItem" disable="true" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" onAction="#submitItem" prefHeight="25.0" prefWidth="130.0" text="Add item" />
               </children>
             </AnchorPane>
           </content>
@@ -81,5 +79,6 @@
         </AnchorPane>
       </items>
     </SplitPane>
+      <Button mnemonicParsing="false" text="Button" />
   </children>
 </VBox>
