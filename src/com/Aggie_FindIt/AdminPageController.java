@@ -35,14 +35,17 @@ public class AdminPageController implements Initializable{
 
 
     @FXML
-    private VBox itemInputForm;
+    private Label itemCategoryLabel, itemDateLabel;
     @FXML
-    private TextField itemNameField;
+    private DatePicker itemDate;
     @FXML
-    private TextField descriptionField;
+    private TextField itemDescription, itemColor, itemSearchName; 
+    @FXML 
+    private Button completeReturn, cancel, addItem,searchButton;
     @FXML
-    private ComboBox<String> buildingField;
+    private AnchorPane middlePane;
     @FXML
+
     private ComboBox<String> categoryField;
   
     @FXML
@@ -67,6 +70,23 @@ public class AdminPageController implements Initializable{
         System.out.println("Returning to home page from Admin page");
         Aggie_FindIt.loadMainPage();
     }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        addItem.setOpacity(0);
+        itemDescription.setOpacity(0);
+        itemColor.setOpacity(0);
+        itemCategory.setOpacity(0);
+        itemCategoryLabel.setOpacity(0);
+        itemDate.setOpacity(0);
+        itemDateLabel.setOpacity(0);
+        completeReturn.setOpacity(0);
+        cancel.setOpacity(0);
+        returnText.setOpacity(0);
+        itemCategory.getItems().addAll(categories);
+
+        itemSearchName.setOpacity(0);
+        searchButton.setOpacity(0);
+        procedure.setOpacity(0);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -97,34 +117,18 @@ public class AdminPageController implements Initializable{
         
         updateLog();
         reloadButton.setOnAction(event -> updateLog());
+
     }
-
     @FXML
-    private void updateLog() {
-        String logContent = getRecentItems();
-        System.out.println(logContent);
-
-        // Split the string into individual items
-        String[] items = logContent.split("\n");
-        logEntries.clear();
-
-        // Parse each item and split it into columns
-        for (String item : items) {
-            // Extract the fields for Item Name, Description, Building, and Category from each item
-            String[] fields = item.split(", ");
-            if (fields.length == 5) {
-                // Get the individual field values from the split string
-                String itemName = fields[0].split(": ")[1];
-                String description = fields[1].split(": ")[1];
-                String building = fields[2].split(": ")[1];
-                String category = fields[3].split(": ")[1];
-                String time = fields[4].split(": ")[1]; // Extract the time
-
-                // Create an observable list of fields and add it to the table
-                ObservableList<String> row = FXCollections.observableArrayList(itemName, description, building, category, time);
-                logEntries.add(row);
-            }
-        }
+    private void itemReturn() {
+        cancel();
+        completeReturn.setDisable(false);
+        completeReturn.setOpacity(100);
+        cancel.setDisable(false);
+        cancel.setOpacity(100);
+        returnText.setDisable(true);
+        returnText.setOpacity(100);
+        procedure.setOpacity(100);
     }
 
     @FXML
@@ -134,10 +138,20 @@ public class AdminPageController implements Initializable{
     }
 
     @FXML
-    private void handleCancelItemInput() {
-        // Hide the form and clear the fields
-        clearItemInputForm();
-        itemInputForm.setVisible(false);
+    private void itemSearch() {
+        cancel();
+        itemDescription.setDisable(false);
+        itemDescription.setOpacity(100);
+        itemCategory.setDisable(false);
+        itemCategory.setOpacity(100);
+        itemCategoryLabel.setDisable(false);
+        itemCategoryLabel.setOpacity(100);
+        cancel.setDisable(false);
+        cancel.setOpacity(100);
+        itemSearchName.setDisable(false);
+        itemSearchName.setOpacity(100);
+        searchButton.setDisable(false);
+        searchButton.setOpacity(100);
     }
 
     @FXML

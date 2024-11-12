@@ -10,28 +10,49 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class WhereToGoPageController {
     @FXML
-    private TableView<String[]> tableView; // Using String[] for each row
-    @FXML
-    private TableColumn<String[], String> buildingColumn;
-    @FXML
-    private TableColumn<String[], String> roomNumberColumn;
+    private TableView<ItemLog> itemTable;
 
     @FXML
+    private TableColumn<ItemLog, String> buildingColumn;
+
+    @FXML
+    private TableColumn<ItemLog, String> roomColumn;
+
     public void initialize() {
-        // Initialize the columns
-        buildingColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[0]));
-        roomNumberColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[1]));
+        // Initialize table columns
+        buildingColumn.setCellValueFactory(new PropertyValueFactory<>("building"));
+        roomColumn.setCellValueFactory(new PropertyValueFactory<>("room"));
 
-        // Sample data as arrays
-        ObservableList<String[]> rooms = FXCollections.observableArrayList(
-            new String[]{"Science Hall", "101"},
-            new String[]{"Hardman and Jacobs", "202"},
-            new String[]{"Corbett Center Student Union", "303"}
-        );
-
-        // Populate the table
-        tableView.setItems(rooms);
+        // Populate the table with sample data
+        itemTable.setItems(getSampleData());
     }
+
+    private ObservableList<ItemLog> getSampleData() {
+        return FXCollections.observableArrayList(
+            new ItemLog("Hardman and Jacobs", "123"),
+            new ItemLog("Science Hall", "456"),
+            new ItemLog("Corbett Center", "789")
+        );
+    }
+
+    public static class ItemLog {
+        private final String building;
+        private final String room;
+
+        public ItemLog(String building, String room) {
+            this.building = building;
+            this.room = room;
+        }
+
+        public String getBuilding() {
+            return building;
+        }
+
+        public String getRoom() {
+            return room;
+        }
+    }
+
 
     @FXML
     private void goBack() {
