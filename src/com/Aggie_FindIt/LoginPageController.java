@@ -31,6 +31,7 @@ public class LoginPageController {
                 alert.setHeaderText(null);
                 alert.setContentText("Login successful for Student: " + usernameField.getText());
                 alert.show();
+                Aggie_FindIt.loadPage("StudentPage.fxml");
                 break;
             case 2:
                 alert.setTitle("Success");
