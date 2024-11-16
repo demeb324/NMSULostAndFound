@@ -25,7 +25,7 @@ public class sql_link{
 
     private static String loadDatabasePassword() {
         Properties properties = new Properties();
-        try (InputStream input = new FileInputStream("/Users/hathsin/Desktop/CS371/cs371-fa2024-teamproject-lost-and-found/.secret/dbsecret.properties")) {
+        try (InputStream input = new FileInputStream(".secret/dbsecret.properties")) {
             properties.load(input);
             return properties.getProperty("db_password");
         } catch (IOException e) {
@@ -117,7 +117,8 @@ public class sql_link{
             Document newItem = new Document("item_name", item_name)
                     .append("description", description)
                     .append("building", building)
-                    .append("category", category);
+                    .append("category", category)
+                    .append("time", new Date());
 
             items.insertOne(newItem);
             return true;
