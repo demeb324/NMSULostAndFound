@@ -18,8 +18,8 @@
     <!-- TableView for item log -->
     <TableView fx:id="itemTable" prefWidth="400" prefHeight="300">
         <columns>
-            <TableColumn fx:id="buildingColumn" text="Location" prefWidth="200"/>
-            <TableColumn fx:id="timeColumn" text="Time" prefWidth="200"/>
+            <TableColumn fx:id="buildingColumn" text="Description" prefWidth="200"/>
+            <TableColumn fx:id="timeColumn" text="Location" prefWidth="200"/>
         </columns>
     </TableView>
 
