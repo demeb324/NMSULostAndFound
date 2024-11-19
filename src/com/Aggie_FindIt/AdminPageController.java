@@ -5,18 +5,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Alert;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,6 +54,24 @@ public class AdminPageController implements Initializable{
 
 
     @FXML
+    private Button markFoundButton;
+    @FXML
+    private Button markNotFoundButton;
+    @FXML
+    private VBox requestInfoContainer;
+    @FXML
+    private TextArea requestDisplayArea; 
+    @FXML
+    private Label requestLabel;
+    @FXML
+    private ListView<String> requestListView;
+    @FXML
+    private TextArea requestDetailsArea;
+
+    private String selectedRequestId;
+
+
+    @FXML
     private void logout() {
         System.out.println("Returning to home page from Admin page");
         Aggie_FindIt.loadMainPage();
@@ -97,30 +106,29 @@ public class AdminPageController implements Initializable{
         
         updateLog();
         reloadButton.setOnAction(event -> updateLog());
+
+        requestListView.setVisible(false);
+        requestDetailsArea.setVisible(false);
+        markFoundButton.setVisible(false);
+        markNotFoundButton.setVisible(false);
     }
 
     @FXML
     private void updateLog() {
         String logContent = getRecentItems();
-        System.out.println(logContent);
 
-        // Split the string into individual items
         String[] items = logContent.split("\n");
         logEntries.clear();
 
-        // Parse each item and split it into columns
         for (String item : items) {
-            // Extract the fields for Item Name, Description, Building, and Category from each item
             String[] fields = item.split(", ");
             if (fields.length == 5) {
-                // Get the individual field values from the split string
                 String itemName = fields[0].split(": ")[1];
                 String description = fields[1].split(": ")[1];
                 String building = fields[2].split(": ")[1];
                 String category = fields[3].split(": ")[1];
-                String time = fields[4].split(": ")[1]; // Extract the time
+                String time = fields[4].split(": ")[1]; 
 
-                // Create an observable list of fields and add it to the table
                 ObservableList<String> row = FXCollections.observableArrayList(itemName, description, building, category, time);
                 logEntries.add(row);
             }
@@ -239,6 +247,7 @@ public class AdminPageController implements Initializable{
         searchButton.setOpacity(0);
         procedure.setOpacity(0);
         itemInputForm.setVisible(false);
+        hideRequestInfo();
     }
 
     @FXML
@@ -260,5 +269,101 @@ public class AdminPageController implements Initializable{
 
     @FXML
     private void submitItem() {}
+
+
+    @FXML
+    private void showRequestInfo() {
+        cancel();
+        requestListView.setVisible(true);
+        requestDetailsArea.setVisible(true);
+        markFoundButton.setVisible(true);
+        markNotFoundButton.setVisible(true);
+
+        String allRequests = sql_link.getRequests();
+        displayRequests(allRequests);
+    }
+    
+    @FXML
+    private void hideRequestInfo(){
+        requestListView.setVisible(false);
+        requestDetailsArea.setVisible(false);
+        markFoundButton.setVisible(false);
+        markNotFoundButton.setVisible(false);
+    }
+
+
+    @FXML
+    private void markAsFound() {
+        if (selectedRequestId != null) {
+            sql_link.markRequest(selectedRequestId, 1);
+            clearSelection();
+        }
+    }
+
+    @FXML
+    private void markAsNotFound() {
+        if (selectedRequestId != null) {
+            sql_link.markRequest(selectedRequestId, 2);
+            clearSelection();
+        }
+    }
+
+    private void clearSelection() {
+        requestListView.getSelectionModel().clearSelection();
+        requestDetailsArea.clear();
+        selectedRequestId = null;
+    }
+
+
+    private void displayRequests(String requestData) {
+        // Split requests by two new lines
+        String[] requests = requestData.split("\\n\\n");
+        ObservableList<String> requestList = FXCollections.observableArrayList();
+    
+        for (String request : requests) {
+            // Extract fields (assuming each field is separated by a single new line)
+            String[] fields = request.split("\\n");
+    
+            // Skip requests that don't have enough fields (adjust if necessary)
+            if (fields.length > 1) {
+                // Exclude the object ID (assume it's the first field)
+                StringBuilder formattedRequest = new StringBuilder();
+                for (int i = 1; i < fields.length; i++) {
+                    formattedRequest.append(fields[i]).append("\n");
+                }
+    
+                // Add formatted request (excluding object ID) to the list
+                requestList.add(formattedRequest.toString().trim());
+            }
+        }
+    
+        requestListView.setItems(requestList);
+    }
+    
+
+    @FXML
+    private void handleRequestSelection() {
+        int selectedIndex = requestListView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex != -1) {
+            String selectedRequest = requestListView.getSelectionModel().getSelectedItem();
+            requestDetailsArea.setText(selectedRequest);
+
+            String allRequests = sql_link.getRequests();
+            String[] requests = allRequests.split("\\n\\n");
+
+            if (selectedIndex < requests.length) {
+                String originalRequest = requests[selectedIndex];
+                selectedRequestId = extractRequestId(originalRequest);
+            }
+        }
+    }
+    
+    private String extractRequestId(String request) {
+        String[] fields = request.split("\\n");
+        if (fields.length > 0) {
+            return fields[0]; // Assume the object ID is the first line
+        }
+        return null;
+    }
 
 }
