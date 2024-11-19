@@ -25,7 +25,7 @@ public class sql_link{
 
     private static String loadDatabasePassword() {
         Properties properties = new Properties();
-        try (InputStream input = new FileInputStream(".secrets/dbsecret.properties")) {
+        try (InputStream input = new FileInputStream(".secret/dbsecret.properties")) {
             properties.load(input);
             return properties.getProperty("db_password");
         } catch (IOException e) {
@@ -101,7 +101,8 @@ public class sql_link{
                 result.append(item.getString("item_name")).append(", ");
                 result.append(item.getString("description")).append(", ");
                 result.append(item.getString("building")).append(", ");
-                result.append(item.getString("category")).append("\n");
+                result.append(item.getString("category")).append(", ");
+                result.append(item.getDate("time")).append("\n");
             }
             return result.toString();
         } catch (Exception e) {
@@ -117,7 +118,8 @@ public class sql_link{
             Document newItem = new Document("item_name", item_name)
                     .append("description", description)
                     .append("building", building)
-                    .append("category", category);
+                    .append("category", category)
+                    .append("time", new Date());
 
             items.insertOne(newItem);
             return true;
@@ -237,6 +239,95 @@ public class sql_link{
             throw new RuntimeException("Error fetching recent items", e);
         }
     }
+
+    public static boolean addRequest(String name, String studentId, String email, 
+                                 String itemName, String itemDescription, 
+                                 String category, String location, Date time) {
+        try (MongoClient mongoClient = createConnection()) {
+            MongoDatabase db = mongoClient.getDatabase("CS371");
+            MongoCollection<Document> requests = db.getCollection("Request");
+            
+            Document newRequest = new Document("name", name)
+                    .append("studentId", studentId)
+                    .append("email", email)
+                    .append("itemName", itemName)
+                    .append("itemDescription", itemDescription)
+                    .append("category", category)
+                    .append("location", location)
+                    .append("time", time)
+                    .append("status", 0);//0 is no action, 1 is found, 2 is not found
+            
+            requests.insertOne(newRequest);
+            return true; 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; 
+        }
+    }
+
+    public static String getRequests() {
+        try (MongoClient mongoClient = createConnection()) {
+            MongoDatabase db = mongoClient.getDatabase("CS371");
+            MongoCollection<Document> requests = db.getCollection("Request");
+    
+            Document filter = new Document(); // Empty filter retrieves all documents
+    
+            StringBuilder result = new StringBuilder();
+            for (Document request : requests.find(filter)) {
+                ObjectId id = request.getObjectId("_id");
+                String name = request.getString("name");
+                String studentId = request.getString("studentId");
+                String email = request.getString("email");
+                String itemName = request.getString("itemName");
+                String description = request.getString("itemDescription");
+                String category = request.getString("category");
+                String location = request.getString("location");
+                Date time = request.getDate("time");
+                int status = request.getInteger("status", 0);
+    
+                // Format each request's details
+                result.append(id).append("\n")
+                      .append("Name: ").append(name).append("\n")
+                      .append("Student ID: ").append(studentId).append("\n")
+                      .append("Email: ").append(email).append("\n")
+                      .append("Item Name: ").append(itemName).append("\n")
+                      .append("Description: ").append(description).append("\n")
+                      .append("Category: ").append(category).append("\n")
+                      .append("Location: ").append(location).append("\n")
+                      .append("Time: ").append(time).append("\n")
+                      .append("Status: ").append(status == 0 ? "No action" 
+                                      : status == 1 ? "Found" : "Not Found")
+                      .append("\n\n");
+            }
+    
+            return result.toString();
+        } catch (Exception e) {
+            throw new RuntimeException("Error fetching requests: " + e.getMessage(), e);
+        }
+    }
+    
+    
+
+    public static boolean markRequest(String requestId, int status) {
+        try (MongoClient mongoClient = createConnection()) {
+            MongoDatabase db = mongoClient.getDatabase("CS371");
+            MongoCollection<Document> requests = db.getCollection("Requests");
+    
+            // Create the update document
+            Document updateFields = new Document();
+            updateFields.append("status", status);
+    
+            // Update the request by its ID
+            requests.updateOne(new Document("_id", new ObjectId(requestId)), new Document("$set", updateFields));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    
+    
 
     public static String getRecentItemsStudent() {
         try (MongoClient mongoClient = createConnection()) {
