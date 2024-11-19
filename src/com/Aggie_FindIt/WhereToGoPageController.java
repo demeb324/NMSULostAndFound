@@ -31,6 +31,7 @@ public class WhereToGoPageController {
         return FXCollections.observableArrayList(
             new ItemLog("Hardman and Jacobs", "123"),
             new ItemLog("Science Hall", "456"),
+            new ItemLog("Corbett Center", "789"),
             new ItemLog("Corbett Center", "789")
         );
     }
