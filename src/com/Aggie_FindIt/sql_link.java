@@ -25,7 +25,7 @@ public class sql_link{
 
     private static String loadDatabasePassword() {
         Properties properties = new Properties();
-        try (InputStream input = new FileInputStream("/Users/hathsin/Desktop/CS371/cs371-fa2024-teamproject-lost-and-found/.secret/dbsecret.properties")) {
+        try (InputStream input = new FileInputStream(".secrets/dbsecret.properties")) {
             properties.load(input);
             return properties.getProperty("db_password");
         } catch (IOException e) {
@@ -232,6 +232,29 @@ public class sql_link{
                 result.append("Time: ").append(item.getDate("time")).append("\n");
             }
 
+            return result.length() > 0 ? result.toString() : "No recent items found.";
+        } catch (Exception e) {
+            throw new RuntimeException("Error fetching recent items", e);
+        }
+    }
+
+    public static String getRecentItemsStudent() {
+        try (MongoClient mongoClient = createConnection()) {
+            MongoDatabase db = mongoClient.getDatabase("CS371");
+            MongoCollection<Document> items = db.getCollection("Items");
+
+            // Set up time filter for the past 24 hours
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DAY_OF_WEEK, -7);
+            Date last24Hours = calendar.getTime();
+
+            // Query for items added in the last 24 hours
+            StringBuilder result = new StringBuilder();
+            for (Document item : items.find(Filters.gte("time", last24Hours))) {
+                result.append(item.getString("building")).append(", ");
+                result.append(item.getDate("time")).append(", ");
+                result.append(item.getString("category")).append("\n");
+            }
             return result.length() > 0 ? result.toString() : "No recent items found.";
         } catch (Exception e) {
             throw new RuntimeException("Error fetching recent items", e);
