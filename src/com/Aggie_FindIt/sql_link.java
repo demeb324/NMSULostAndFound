@@ -7,9 +7,8 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 import java.util.Calendar;
-
+import java.util.Date;
 import java.util.Properties;
 
 import org.bson.Document;
@@ -25,7 +24,7 @@ public class sql_link{
 
     private static String loadDatabasePassword() {
         Properties properties = new Properties();
-        try (InputStream input = new FileInputStream(".secret/dbsecret.properties")) {
+        try (InputStream input = new FileInputStream(".secrets/dbsecret.properties")) {
             properties.load(input);
             return properties.getProperty("db_password");
         } catch (IOException e) {
