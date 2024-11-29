@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 
 public class Aggie_FindIt extends Application {
     private static Stage primaryStage;
@@ -54,6 +55,11 @@ public class Aggie_FindIt extends Application {
                 scene = new Scene(root, 450, 650);
                 primaryStage.setScene(scene);
                 System.out.println("New scene created and set");
+                primaryStage.setFullScreen(true);
+                primaryStage.setFullScreenExitHint("Press ESC to exit full-screen mode.");
+                primaryStage.setTitle("Aggie Find-It!");
+                primaryStage.getIcons().add(new Image("file:../resources/images/aflogo.png"));
+                primaryStage.show();
             } else {
                 scene.setRoot(root);
                 System.out.println("Existing scene updated with new root");
