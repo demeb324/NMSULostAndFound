@@ -75,7 +75,7 @@ public class RequestItemController {
         if (name.isEmpty() || studentId.isEmpty() || email.isEmpty() || itemName.isEmpty() || 
             itemDescription.isEmpty() || category == null || location == null || date == null || hour == null || amPm == null) {
             statusLabel.setText("Please fill out all fields.");
-        } else if (!studentId.matches("\\d{10}")) {
+        } else if (!studentId.matches("\\d{9}")) {
             statusLabel.setText("Invalid ID");
         } else {
             if (amPm.equals("PM") && hour != 12) {
