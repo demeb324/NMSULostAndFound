@@ -352,6 +352,20 @@ public class sql_link{
         }
     }
 
+    public static void deleteOldItems() {
+        try (MongoClient mongoClient = createConnection()) {
+            MongoDatabase db = mongoClient.getDatabase("CS371");
+            MongoCollection<Document> items = db.getCollection("Items");
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DAY_OF_YEAR, -97);
+            Date cutoffDate = calendar.getTime();
+            items.deleteMany(Filters.lt("time", cutoffDate));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public static void main(String[] args) {
 
     }
