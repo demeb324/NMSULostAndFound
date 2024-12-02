@@ -9,6 +9,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
 <VBox alignment="CENTER" spacing="20" style="-fx-background-color: linear-gradient(to bottom, #941853, #6A1237);" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.Aggie_FindIt.WhereToGoPageController">
     <padding>
@@ -16,22 +19,13 @@
     </padding>
 
     <VBox alignment="CENTER" spacing="10">
-        <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" text="Where to go!" />
+        <Label style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;" text="Where to go?" />
+        <Label style="-fx-font-size: 15px; -fx-text-fill: white;" text="Below are buildings where lost and found items go! Select a building and see where it is at!" />
     </VBox>
 
-    <VBox alignment="CENTER" spacing="15">
-      <ImageView fitHeight="639.0" fitWidth="610.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../resources/images/nmsuMap.jpg_large" />
-         </image>
-      </ImageView>
-        <TableView fx:id="itemTable" prefWidth="400" prefHeight="300">
-        <columns>
-            <TableColumn fx:id="buildingColumn" text="Location" prefWidth="200"/>
-            <TableColumn fx:id="roomColumn" text="room" prefWidth="200"/>
-        </columns>
-    </TableView>
-
+    <VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
+        <ComboBox fx:id="comboBox" promptText="Select a location" prefWidth="200" />
+        <ImageView fx:id="imageView" fitHeight="600" fitWidth="600" preserveRatio="true" />
     </VBox>
 
     <HBox alignment="CENTER" spacing="15">
