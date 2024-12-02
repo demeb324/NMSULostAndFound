@@ -13,7 +13,8 @@
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Student Page" style="-fx-font-size: 24px; -fx-text-fill: white;"/>
+    <Label text="Student Page" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+    <Label text="Here is a log of lost items found over the last week!" style="-fx-font-size: 20px; -fx-text-fill: white;"/>
     
     <!-- TableView for item log -->
     <TableView fx:id="itemTable" prefWidth="600" prefHeight="300" maxWidth="600">
