@@ -316,23 +316,18 @@ public class AdminPageController implements Initializable{
 
 
     private void displayRequests(String requestData) {
-        // Split requests by two new lines
         String[] requests = requestData.split("\\n\\n");
         ObservableList<String> requestList = FXCollections.observableArrayList();
     
         for (String request : requests) {
-            // Extract fields (assuming each field is separated by a single new line)
             String[] fields = request.split("\\n");
     
-            // Skip requests that don't have enough fields (adjust if necessary)
             if (fields.length > 1) {
-                // Exclude the object ID (assume it's the first field)
                 StringBuilder formattedRequest = new StringBuilder();
-                for (int i = 1; i < fields.length; i++) {
+                for (int i = 1; i < 3; i++) {
                     formattedRequest.append(fields[i]).append("\n");
                 }
     
-                // Add formatted request (excluding object ID) to the list
                 requestList.add(formattedRequest.toString().trim());
             }
         }
@@ -345,23 +340,32 @@ public class AdminPageController implements Initializable{
     private void handleRequestSelection() {
         int selectedIndex = requestListView.getSelectionModel().getSelectedIndex();
         if (selectedIndex != -1) {
-            String selectedRequest = requestListView.getSelectionModel().getSelectedItem();
-            requestDetailsArea.setText(selectedRequest);
-
             String allRequests = sql_link.getRequests();
             String[] requests = allRequests.split("\\n\\n");
-
+    
             if (selectedIndex < requests.length) {
                 String originalRequest = requests[selectedIndex];
+                String[] fields = originalRequest.split("\\n");
+                StringBuilder filteredDetails = new StringBuilder();
+    
+                for (int i = 0; i < fields.length; i++) {
+                    if (i != 0) { 
+                        filteredDetails.append(fields[i]).append("\n");
+                    }
+                }
+    
+                requestDetailsArea.setText(filteredDetails.toString().trim());
                 selectedRequestId = extractRequestId(originalRequest);
             }
         }
     }
     
+    
+    
     private String extractRequestId(String request) {
         String[] fields = request.split("\\n");
         if (fields.length > 0) {
-            return fields[0]; // Assume the object ID is the first line
+            return fields[0]; 
         }
         return null;
     }
