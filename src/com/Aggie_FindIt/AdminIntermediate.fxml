@@ -17,7 +17,7 @@
       </Label>
       <ChoiceBox fx:id="buildingsDropdown" prefWidth="150.0" />
       <Button mnemonicParsing="false" onAction="#submit" text="Submit " translateY="20.0" />
-      <TextArea prefHeight="226.0" prefWidth="560.0" style="-fx-background-color: #FFFFFF;" text="To return an item: &#10;&#10;1. Make sure the item is in storage&#10; &#10;2. Once complete, using item description and information, ask students questions about &#10;the item to make sure it is theirs. &#10;&#10;3. Once it is made sure they know the item, if applicable, do one of the following to verify&#10;ownership:&#10; -Ask them to unlock the electronic device&#10; -If no password is needed for the device, ask if it is possible to provide receipts of &#10;  purchase" translateY="35.0">
+      <TextArea disable="true" prefHeight="226.0" prefWidth="560.0" style="-fx-background-color: #FFFFFF;" text="To return an item: &#10;&#10;1. Make sure the item is in storage&#10; &#10;2. Once complete, using item description and information, ask students questions about &#10;the item to make sure it is theirs. &#10;&#10;3. Once it is made sure they know the item, if applicable, do one of the following to verify&#10;ownership:&#10; -Ask them to unlock the electronic device&#10; -If no password is needed for the device, ask if it is possible to provide receipts of &#10;  purchase" translateY="35.0">
          <VBox.margin>
             <Insets left="20.0" right="20.0" />
          </VBox.margin>
