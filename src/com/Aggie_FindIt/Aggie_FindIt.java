@@ -55,7 +55,7 @@ public class Aggie_FindIt extends Application {
                 scene = new Scene(root, 1280, 720);
                 primaryStage.setScene(scene);
                 System.out.println("New scene created and set");
-                primaryStage.setFullScreen(true);
+                primaryStage.setFullScreen(false);
                 primaryStage.setFullScreenExitHint("Press ESC to exit full-screen mode.");
                 primaryStage.setTitle("Aggie Find-It!");
                 primaryStage.getIcons().add(new Image("file:../resources/images/aflogo.png"));
