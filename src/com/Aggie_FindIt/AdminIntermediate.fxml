@@ -2,25 +2,36 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #981853;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Aggie_FindIt.AdminIntermediatePageController">
-   <children>
-      <Label text="Please indicate what building you are located at today" textFill="#fffefe" translateY="-20.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <ChoiceBox fx:id="buildingsDropdown" prefWidth="150.0" />
-      <Button mnemonicParsing="false" onAction="#submit" text="Submit " translateY="20.0" />
-      <TextArea disable="true" prefHeight="226.0" prefWidth="560.0" style="-fx-background-color: #FFFFFF;" text="To return an item: &#10;&#10;1. Make sure the item is in storage&#10; &#10;2. Once complete, using item description and information, ask students questions about &#10;the item to make sure it is theirs. &#10;&#10;3. Once it is made sure they know the item, if applicable, do one of the following to verify&#10;ownership:&#10; -Ask them to unlock the electronic device&#10; -If no password is needed for the device, ask if it is possible to provide receipts of &#10;  purchase" translateY="35.0">
-         <VBox.margin>
-            <Insets left="20.0" right="20.0" />
-         </VBox.margin>
-      </TextArea>
-   </children>
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20" style="-fx-background-color: #981853;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Aggie_FindIt.AdminIntermediatePageController">
+    <padding>
+        <Insets bottom="20" left="20" right="20" top="20" />
+    </padding>
+    <children>
+        <!-- Label Component -->
+        <Label text="Please read the following before you proceed!" textAlignment="CENTER" textFill="#fffefe">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+      <StackPane>
+        <!-- Background rectangle -->
+        <Rectangle arcHeight="10" arcWidth="10" fill="#a8896e" height="200.0" opacity="0.58" width="750.0" />
+         <TextArea editable="false" maxHeight="180.0" maxWidth="720.0" prefHeight="200.0" prefWidth="200.0" text="To return an item:&#10;1. Make sure the item is in storage.&#10;2. Use the item's description and information to ask the student questions about the item to ensure it is theirs.&#10;3. If ownership is established, take one of the following steps to verify:&#10;      - Ask the student to unlock the electronic device.&#10;      - If no password is required, request a receipt of purchase (if possible).&#10;" wrapText="true">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </TextArea>
+    </StackPane>
+
+        <!-- Buttons -->
+        <Button mnemonicParsing="false" onAction="#submit" style="-fx-background-color: #28a745; -fx-text-fill: white;" text="Proceed" />
+        <Button onAction="#backToHome" style="-fx-background-color: #6c757d; -fx-text-fill: white;" text="Logout" />
+    </children>
 </VBox>
