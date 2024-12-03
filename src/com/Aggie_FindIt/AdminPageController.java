@@ -26,15 +26,15 @@ public class AdminPageController implements Initializable{
 
 
     @FXML
-    private VBox itemInputForm;
+    private VBox itemInputForm, itemSearchForm;
     @FXML
-    private TextField itemNameField;
+    private TextField itemNameField, SearchitemNameField;
     @FXML
-    private TextField descriptionField;
+    private TextField descriptionField, SearchdescriptionField;
     @FXML
-    private ComboBox<String> buildingField;
+    private ComboBox<String> buildingField, SearchbuildingField;
     @FXML
-    private ComboBox<String> categoryField;
+    private ComboBox<String> categoryField, SearchcategoryField;
   
     @FXML
     private ChoiceBox<String> itemCategory;
@@ -143,9 +143,20 @@ public class AdminPageController implements Initializable{
 
     @FXML
     private void handleCancelItemInput() {
-        // Hide the form and clear the fields
         clearItemInputForm();
         itemInputForm.setVisible(false);
+    }
+
+    @FXML
+    private void showItemSearchForm() {
+        cancel();
+        itemSearchForm.setVisible(true);
+    }
+
+    @FXML
+    private void handleCancelSearch() {
+        clearSearchForm();
+        itemSearchForm.setVisible(false);
     }
 
     @FXML
@@ -164,7 +175,6 @@ public class AdminPageController implements Initializable{
             return;
         }
 
-        // Attempt to add the item to the database
         boolean success = sql_link.addItem(itemName, description, building, category);
 
         if (success) {
@@ -185,6 +195,13 @@ public class AdminPageController implements Initializable{
     private void clearItemInputForm() {
         itemNameField.clear();
         descriptionField.clear();
+    }
+
+    private void clearSearchForm() {
+        SearchitemNameField.clear();
+        SearchdescriptionField.clear();
+        SearchbuildingField.getSelectionModel().clearSelection(); 
+        SearchcategoryField.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -248,6 +265,7 @@ public class AdminPageController implements Initializable{
         procedure.setOpacity(0);
         itemInputForm.setVisible(false);
         hideRequestInfo();
+        itemSearchForm.setVisible(false);
     }
 
     @FXML
@@ -360,6 +378,45 @@ public class AdminPageController implements Initializable{
         }
     }
     
+    @FXML
+    private void performItemSearch() {
+        String itemName = SearchitemNameField.getText().trim();
+        String description = SearchdescriptionField.getText().trim();
+        String building = SearchbuildingField.getValue() != null ? SearchbuildingField.getValue() : "";
+        String category = SearchcategoryField.getValue() != null ? SearchcategoryField.getValue() : "";
+
+        String searchResults = sql_link.itemSearch(itemName, description, building, category);
+
+        logEntries.clear();
+
+        if (searchResults.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No Results");
+            alert.setHeaderText(null);
+            alert.setContentText("No items found matching the search criteria.");
+            alert.show();
+            return;
+        }
+
+        String[] items = searchResults.split("\n");
+        for (String item : items) {
+            String[] fields = item.split(", ");
+            if (fields.length >= 5) {
+                String id = fields[0]; 
+                String itemNameResult = fields[1];
+                String descriptionResult = fields[2];
+                String buildingResult = fields[3];
+                String categoryResult = fields[4];
+                String time = fields.length > 5 ? fields[5] : "N/A";
+
+                ObservableList<String> row = FXCollections.observableArrayList(
+                    itemNameResult, descriptionResult, buildingResult, categoryResult, time
+                );
+                logEntries.add(row);
+            }
+        }
+    }
+
     
     
     private String extractRequestId(String request) {

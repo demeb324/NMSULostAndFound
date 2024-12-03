@@ -86,16 +86,15 @@ public class sql_link{
         try (MongoClient mongoClient = createConnection()) {
             MongoDatabase db = mongoClient.getDatabase("CS371");
             MongoCollection<Document> items = db.getCollection("Items");
-
+    
             Document filter = new Document();
-            if (!item_name.isEmpty()) filter.append("item_name", item_name);
-            if (!description.isEmpty()) filter.append("description", description);
-            if (!building.isEmpty()) filter.append("building", building);
-            if (!category.isEmpty()) filter.append("category", category);
-
+            if (!item_name.isEmpty()) filter.append("item_name", new Document("$regex", item_name).append("$options", "i"));
+            if (!description.isEmpty()) filter.append("description",  new Document("$regex", description).append("$options", "i")); 
+            if (!building.isEmpty()) filter.append("building", building);         
+            if (!category.isEmpty()) filter.append("category",  category);
             StringBuilder result = new StringBuilder();
             for (Document item : items.find(filter)) {
-                ObjectId id = item.getObjectId("_id"); // Get the ObjectId
+                ObjectId id = item.getObjectId("_id"); 
                 result.append(id.toString()).append(", ");
                 result.append(item.getString("item_name")).append(", ");
                 result.append(item.getString("description")).append(", ");
@@ -108,6 +107,7 @@ public class sql_link{
             throw new RuntimeException(e);
         }
     }
+    
 
     public static boolean addItem(String item_name, String description, String building, String category) {
         try (MongoClient mongoClient = createConnection()) {
