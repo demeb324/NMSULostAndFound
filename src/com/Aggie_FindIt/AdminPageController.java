@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.beans.value.ObservableValue;
 
 import static com.Aggie_FindIt.sql_link.*;
 
@@ -20,7 +21,7 @@ public class AdminPageController implements Initializable{
     @FXML
     private TableColumn<ObservableList<String>, String> itemNameColumn, descriptionColumn, buildingColumn, categoryColumn, timeColumn;
     @FXML
-    private Button reloadButton; 
+    private Button reloadButton, removeItem, editItem;
 
     private ObservableList<ObservableList<String>> logEntries = FXCollections.observableArrayList();
 
@@ -70,6 +71,8 @@ public class AdminPageController implements Initializable{
 
     private String selectedRequestId;
 
+    private ObservableList<String> currentRowSelected;
+
 
     @FXML
     private void logout() {
@@ -79,6 +82,24 @@ public class AdminPageController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        logTableView.getSelectionModel().selectedItemProperty().addListener(
+            (ObservableValue<? extends ObservableList<String>> observable, ObservableList<String> oldValue, ObservableList<String> newValue) -> {
+                if (newValue != null) {
+                    currentRowSelected = newValue;
+                    populateLogButtons();
+
+                    System.out.println("Selected row: " + newValue);
+                }
+            }
+        );
+
+
+        removeItem.setDisable(true);
+        removeItem.setVisible(false);
+        editItem.setDisable(true);
+        editItem.setVisible(false);
+
         addItem.setOpacity(0);
         itemDescription.setOpacity(0);
         itemColor.setOpacity(0);
@@ -139,12 +160,15 @@ public class AdminPageController implements Initializable{
     private void showItemInputForm() {
         cancel();
         itemInputForm.setVisible(true);
+        itemInputForm.setDisable(false);
     }
 
     @FXML
     private void handleCancelItemInput() {
+        // Hide the form and clear the fields
         clearItemInputForm();
         itemInputForm.setVisible(false);
+        itemInputForm.setDisable(true);
     }
 
     @FXML
@@ -175,6 +199,7 @@ public class AdminPageController implements Initializable{
             return;
         }
 
+        // Attempt to add the item to the database
         boolean success = sql_link.addItem(itemName, description, building, category);
 
         if (success) {
@@ -182,14 +207,16 @@ public class AdminPageController implements Initializable{
             alert.setHeaderText(null);
             alert.setContentText("Item added successfully!");
             alert.show();
-            clearItemInputForm();
-            itemInputForm.setVisible(false);
+            updateLog();
         } else {
             alert.setTitle("Failure");
             alert.setHeaderText(null);
             alert.setContentText("Failed to add item. Please try again.");
             alert.show();
         }
+
+        handleCancelItemInput();
+        
     }
 
     private void clearItemInputForm() {
@@ -285,8 +312,7 @@ public class AdminPageController implements Initializable{
         searchButton.setOpacity(100);
     }
 
-    @FXML
-    private void submitItem() {}
+    public void submitItem(){}
 
 
     @FXML
@@ -377,7 +403,7 @@ public class AdminPageController implements Initializable{
             }
         }
     }
-    
+
     @FXML
     private void performItemSearch() {
         String itemName = SearchitemNameField.getText().trim();
@@ -418,13 +444,28 @@ public class AdminPageController implements Initializable{
     }
 
     
-    
+    @FXML
     private String extractRequestId(String request) {
         String[] fields = request.split("\\n");
         if (fields.length > 0) {
-            return fields[0]; 
+            return fields[0]; // Assume the object ID is the first line
         }
         return null;
+    }
+
+    @FXML
+    private void populateLogButtons() {
+        removeItem.setDisable(false);
+        removeItem.setVisible(true);
+        editItem.setDisable(false);
+        editItem.setVisible(true);
+    }
+
+    @FXML
+    private void removeItemButton() {
+        String item = sql_link.itemSearch(currentRowSelected.get(0), currentRowSelected.get(1), currentRowSelected.get(2), currentRowSelected.get(3));
+        System.out.println(sql_link.removeItem(item.strip().split(", ")[0].strip()));
+        updateLog();
     }
 
 }
