@@ -8,6 +8,7 @@ public class MainPageController {
     private void openLoginPage() {
         System.out.println("openLoginPage method called");
         Aggie_FindIt.loadPage("Login.fxml");
+        sql_link.deleteOldItems();
     }
 
     @FXML
