@@ -36,9 +36,7 @@ public class AdminPageController implements Initializable{
     private ComboBox<String> buildingField, SearchbuildingField;
     @FXML
     private ComboBox<String> categoryField, SearchcategoryField;
-    
-    @FXML
-    private VBox lookupForm;
+  
     @FXML
     private ChoiceBox<String> itemCategory;
     @FXML
@@ -46,11 +44,7 @@ public class AdminPageController implements Initializable{
     @FXML
     private DatePicker itemDate;
     @FXML
-    private TextField itemDescription;
-    @FXML
-    private TextField itemColor;
-    @FXML
-    private TextField itemSearchName; 
+    private TextField itemDescription, itemColor, itemSearchName; 
     @FXML 
     private Button completeReturn, cancel, addItem,searchButton;
     @FXML
@@ -111,6 +105,8 @@ public class AdminPageController implements Initializable{
         itemColor.setOpacity(0);
         itemCategory.setOpacity(0);
         itemCategoryLabel.setOpacity(0);
+        itemDate.setOpacity(0);
+        itemDateLabel.setOpacity(0);
         completeReturn.setOpacity(0);
         cancel.setOpacity(0);
         returnText.setOpacity(0);
@@ -164,12 +160,15 @@ public class AdminPageController implements Initializable{
     private void showItemInputForm() {
         cancel();
         itemInputForm.setVisible(true);
+        itemInputForm.setDisable(false);
     }
 
     @FXML
     private void handleCancelItemInput() {
+        // Hide the form and clear the fields
         clearItemInputForm();
         itemInputForm.setVisible(false);
+        itemInputForm.setDisable(true);
     }
 
     @FXML
@@ -200,6 +199,7 @@ public class AdminPageController implements Initializable{
             return;
         }
 
+        // Attempt to add the item to the database
         boolean success = sql_link.addItem(itemName, description, building, category);
 
         if (success) {
@@ -207,8 +207,6 @@ public class AdminPageController implements Initializable{
             alert.setHeaderText(null);
             alert.setContentText("Item added successfully!");
             alert.show();
-            clearItemInputForm();
-            itemInputForm.setVisible(false);
             updateLog();
         } else {
             alert.setTitle("Failure");
@@ -216,6 +214,9 @@ public class AdminPageController implements Initializable{
             alert.setContentText("Failed to add item. Please try again.");
             alert.show();
         }
+
+        handleCancelItemInput();
+        
     }
 
     private void clearItemInputForm() {
@@ -233,25 +234,29 @@ public class AdminPageController implements Initializable{
     @FXML
     private void addItem() {
         cancel();
-        itemDescription.setVisible(true);
+        itemDescription.setDisable(false);
         itemDescription.setOpacity(100);
-        itemColor.setVisible(true);
+        itemColor.setDisable(false);
         itemColor.setOpacity(100);
-        itemCategory.setVisible(true);
+        itemCategory.setDisable(false);
         itemCategory.setOpacity(100);
-        itemCategoryLabel.setVisible(true);
+        itemCategoryLabel.setDisable(false);
         itemCategoryLabel.setOpacity(100);
-        addItem.setVisible(true);
+        itemDate.setDisable(false);
+        itemDate.setOpacity(100);
+        itemDateLabel.setDisable(false);
+        itemDateLabel.setOpacity(100);
+        addItem.setDisable(false);
         addItem.setOpacity(100);
-        cancel.setVisible(true);
+        cancel.setDisable(false);
         cancel.setOpacity(100);
     }
     @FXML
     private void itemReturn() {
         cancel();
-        completeReturn.setVisible(true);
+        completeReturn.setDisable(false);
         completeReturn.setOpacity(100);
-        cancel.setVisible(true);
+        cancel.setDisable(false);
         cancel.setOpacity(100);
         returnText.setDisable(true);
         returnText.setOpacity(100);
@@ -268,6 +273,10 @@ public class AdminPageController implements Initializable{
         itemCategory.setOpacity(0);
         itemCategoryLabel.setDisable(true);
         itemCategoryLabel.setOpacity(0);
+        itemDate.setDisable(true);
+        itemDate.setOpacity(0);
+        itemDateLabel.setDisable(true);
+        itemDateLabel.setOpacity(0);
         addItem.setDisable(true);
         addItem.setOpacity(0);
         completeReturn.setDisable(true);
@@ -282,7 +291,6 @@ public class AdminPageController implements Initializable{
         searchButton.setOpacity(0);
         procedure.setOpacity(0);
         itemInputForm.setVisible(false);
-        lookupForm.setVisible(false);
         hideRequestInfo();
         itemSearchForm.setVisible(false);
     }
@@ -290,7 +298,18 @@ public class AdminPageController implements Initializable{
     @FXML
     private void itemSearch() {
         cancel();
-        lookupForm.setVisible(true);
+        itemDescription.setDisable(false);
+        itemDescription.setOpacity(100);
+        itemCategory.setDisable(false);
+        itemCategory.setOpacity(100);
+        itemCategoryLabel.setDisable(false);
+        itemCategoryLabel.setOpacity(100);
+        cancel.setDisable(false);
+        cancel.setOpacity(100);
+        itemSearchName.setDisable(false);
+        itemSearchName.setOpacity(100);
+        searchButton.setDisable(false);
+        searchButton.setOpacity(100);
     }
 
     public void submitItem(){}
@@ -384,7 +403,7 @@ public class AdminPageController implements Initializable{
             }
         }
     }
-    
+
     @FXML
     private void performItemSearch() {
         String itemName = SearchitemNameField.getText().trim();
@@ -425,22 +444,21 @@ public class AdminPageController implements Initializable{
     }
 
     
-    
     @FXML
     private String extractRequestId(String request) {
         String[] fields = request.split("\\n");
         if (fields.length > 0) {
-            return fields[0]; 
+            return fields[0]; // Assume the object ID is the first line
         }
         return null;
     }
 
     @FXML
     private void populateLogButtons() {
-        removeItem.setVisible(true);
         removeItem.setDisable(false);
-        editItem.setVisible(true);
+        removeItem.setVisible(true);
         editItem.setDisable(false);
+        editItem.setVisible(true);
     }
 
     @FXML
