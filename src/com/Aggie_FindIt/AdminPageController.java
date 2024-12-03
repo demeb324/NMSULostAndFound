@@ -21,7 +21,7 @@ public class AdminPageController implements Initializable{
     @FXML
     private TableColumn<ObservableList<String>, String> itemNameColumn, descriptionColumn, buildingColumn, categoryColumn, timeColumn;
     @FXML
-    private Button reloadButton, removeItem, editItem;
+    private Button reloadButton, removeItem;
 
     private ObservableList<ObservableList<String>> logEntries = FXCollections.observableArrayList();
 
@@ -87,8 +87,6 @@ public class AdminPageController implements Initializable{
 
         removeItem.setDisable(true);
         removeItem.setVisible(false);
-        editItem.setDisable(true);
-        editItem.setVisible(false);
 
         
         returnText.setOpacity(0);
@@ -372,8 +370,6 @@ public class AdminPageController implements Initializable{
     private void populateLogButtons() {
         removeItem.setDisable(false);
         removeItem.setVisible(true);
-        editItem.setDisable(false);
-        editItem.setVisible(true);
     }
 
     @FXML
