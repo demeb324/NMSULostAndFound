@@ -52,8 +52,6 @@
                   <TextField fx:id="itemColor" disable="true" layoutX="193.0" layoutY="86.0" promptText="Item Color" />
                   <ChoiceBox fx:id="itemCategory" disable="true" layoutX="15.0" layoutY="86.0" prefWidth="150.0" />
                   <Label fx:id="itemCategoryLabel" disable="true" layoutX="15.0" layoutY="69.0" text="Category" />
-                  <DatePicker fx:id="itemDate" disable="true" layoutX="353.0" layoutY="86.0" />
-                  <Label fx:id="itemDateLabel" disable="true" layoutX="353.0" layoutY="69.0" text="Day turned in" />
                   <TextArea fx:id="returnText" disable="true" layoutX="21.0" layoutY="66.0" prefHeight="125.0" prefWidth="493.0" text="Please refer yourself to the Procedure Reminder below this for the&#10;correct procedure when returning an item.&#10;&#10;BEFORE HANDING ITEM OVER: if it is deemed that a return is in order, please click&#10;complete return, which will redirect you to the search item page. Search for the item,&#10;and only then hand it over to the student. MAKE SURE ITEM IS REMOVED. &#10;" />
                   <Button fx:id="completeReturn" disable="true" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" onAction="#itemSearch" prefHeight="25.0" prefWidth="130.0" text="Completed return" />
                   <Button fx:id="cancel" disable="true" layoutX="173.0" layoutY="215.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
@@ -69,6 +67,22 @@
                       <Button fx:id="markNotFoundButton" text="Mark as Not Found" onAction="#markAsNotFound" />
                     </HBox>
                   </VBox>
+                  
+            <VBox fx:id="lookupForm" layoutX="50.0" layoutY="80.0" spacing="5" alignment="CENTER" visible="false">
+              <HBox>
+                <VBox>
+                  <Label fx:id="itemCategoryLabel"  layoutX="15.0" layoutY="69.0" text="Category" />
+                  <ChoiceBox fx:id="itemCategory"  layoutX="15.0" layoutY="86.0" prefWidth="150.0" />
+                </VBox>
+                <VBox>
+                  <Label fx:id="itemSearchLabel"  layoutX="15.0" layoutY="69.0" text="Name" />
+                  <TextField fx:id="itemSearchName"  layoutX="185.0" layoutY="86.0" promptText="item name" />
+                </VBox>
+              </HBox>
+              <Label fx:id="itemDescriptionLabel"  layoutX="15.0" layoutY="69.0" text="Description" />
+              <TextField fx:id="itemDescription"  layoutX="16.0" layoutY="132.0" prefHeight="70.0" prefWidth="504.0" promptText="Item description" />
+              <Button fx:id="searchButton"  layoutX="21.0" layoutY="215.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Search item" />
+            </VBox>
 
             <VBox fx:id="itemInputForm" layoutX="50.0" layoutY="80.0" spacing="5" alignment="CENTER" visible="false">
                   <Label text="Add New Item"/>
