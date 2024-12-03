@@ -1,57 +1,47 @@
 package com.Aggie_FindIt;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class WhereToGoPageController {
     @FXML
-    private TableView<ItemLog> itemTable;
+    private ComboBox<String> comboBox;
 
     @FXML
-    private TableColumn<ItemLog, String> buildingColumn;
+    private ImageView imageView;
 
-    @FXML
-    private TableColumn<ItemLog, String> roomColumn;
-
+    
     public void initialize() {
-        // Initialize table columns
-        buildingColumn.setCellValueFactory(new PropertyValueFactory<>("building"));
-        roomColumn.setCellValueFactory(new PropertyValueFactory<>("room"));
+        Image placeholderImage = new Image("file:../resources/images/aflogo.png");
+        imageView.setImage(placeholderImage);
 
-        // Populate the table with sample data
-        itemTable.setItems(getSampleData());
-    }
+        // Populate the ComboBox with image names or paths
+        comboBox.getItems().addAll("Branson", "Computer Center", "Corbett Center Student Union", "Hardman and Jacobs Undergraduate Learning Center", "Campus Police", "Science Hall", "Zuhl Library");
 
-    private ObservableList<ItemLog> getSampleData() {
-        return FXCollections.observableArrayList(
-            new ItemLog("Hardman and Jacobs", "123"),
-            new ItemLog("Science Hall", "456"),
-            new ItemLog("Corbett Center", "789"),
-            new ItemLog("Corbett Center", "789")
-        );
-    }
+        // Add a listener to update the ImageView when the selection changes
+        comboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                // Map the selected item to an image path
+                String imagePath = switch (newValue) {
+                    case "Branson" -> "file:../resources/images/branson.png";
+                    case "Computer Center" -> "file:../resources/images/cc.png";
+                    case "Corbett Center Student Union" -> "file:../resources/images/corbett.png";
+                    case "Hardman and Jacobs Undergraduate Learning Center" -> "file:../resources/images/hjuc.png";
+                    case "Campus Police" -> "file:../resources/images/police.png";
+                    case "Science Hall" -> "file:../resources/images/sh.png";
+                    case "Zuhl Library" -> "file:../resources/images/zhul.png";
+                    default -> null;
+                };
 
-    public static class ItemLog {
-        private final String building;
-        private final String room;
-
-        public ItemLog(String building, String room) {
-            this.building = building;
-            this.room = room;
-        }
-
-        public String getBuilding() {
-            return building;
-        }
-
-        public String getRoom() {
-            return room;
-        }
+                if (imagePath != null) {
+                    // Load the image and set it in the ImageView
+                    Image image = new Image(imagePath);
+                    imageView.setImage(image);
+                }
+            }
+        });
     }
 
 
