@@ -27,15 +27,15 @@ public class AdminPageController implements Initializable{
 
 
     @FXML
-    private VBox itemInputForm;
+    private VBox itemInputForm, itemSearchForm;
     @FXML
-    private TextField itemNameField;
+    private TextField itemNameField, SearchitemNameField;
     @FXML
-    private TextField descriptionField;
+    private TextField descriptionField, SearchdescriptionField;
     @FXML
-    private ComboBox<String> buildingField;
+    private ComboBox<String> buildingField, SearchbuildingField;
     @FXML
-    private ComboBox<String> categoryField;
+    private ComboBox<String> categoryField, SearchcategoryField;
     
     @FXML
     private VBox lookupForm;
@@ -168,9 +168,20 @@ public class AdminPageController implements Initializable{
 
     @FXML
     private void handleCancelItemInput() {
-        // Hide the form and clear the fields
         clearItemInputForm();
         itemInputForm.setVisible(false);
+    }
+
+    @FXML
+    private void showItemSearchForm() {
+        cancel();
+        itemSearchForm.setVisible(true);
+    }
+
+    @FXML
+    private void handleCancelSearch() {
+        clearSearchForm();
+        itemSearchForm.setVisible(false);
     }
 
     @FXML
@@ -189,7 +200,6 @@ public class AdminPageController implements Initializable{
             return;
         }
 
-        // Attempt to add the item to the database
         boolean success = sql_link.addItem(itemName, description, building, category);
 
         if (success) {
@@ -211,6 +221,13 @@ public class AdminPageController implements Initializable{
     private void clearItemInputForm() {
         itemNameField.clear();
         descriptionField.clear();
+    }
+
+    private void clearSearchForm() {
+        SearchitemNameField.clear();
+        SearchdescriptionField.clear();
+        SearchbuildingField.getSelectionModel().clearSelection(); 
+        SearchcategoryField.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -267,6 +284,7 @@ public class AdminPageController implements Initializable{
         itemInputForm.setVisible(false);
         lookupForm.setVisible(false);
         hideRequestInfo();
+        itemSearchForm.setVisible(false);
     }
 
     @FXML
@@ -323,23 +341,18 @@ public class AdminPageController implements Initializable{
 
 
     private void displayRequests(String requestData) {
-        // Split requests by two new lines
         String[] requests = requestData.split("\\n\\n");
         ObservableList<String> requestList = FXCollections.observableArrayList();
     
         for (String request : requests) {
-            // Extract fields (assuming each field is separated by a single new line)
             String[] fields = request.split("\\n");
     
-            // Skip requests that don't have enough fields (adjust if necessary)
             if (fields.length > 1) {
-                // Exclude the object ID (assume it's the first field)
                 StringBuilder formattedRequest = new StringBuilder();
-                for (int i = 1; i < fields.length; i++) {
+                for (int i = 1; i < 3; i++) {
                     formattedRequest.append(fields[i]).append("\n");
                 }
     
-                // Add formatted request (excluding object ID) to the list
                 requestList.add(formattedRequest.toString().trim());
             }
         }
@@ -352,24 +365,72 @@ public class AdminPageController implements Initializable{
     private void handleRequestSelection() {
         int selectedIndex = requestListView.getSelectionModel().getSelectedIndex();
         if (selectedIndex != -1) {
-            String selectedRequest = requestListView.getSelectionModel().getSelectedItem();
-            requestDetailsArea.setText(selectedRequest);
-
             String allRequests = sql_link.getRequests();
             String[] requests = allRequests.split("\\n\\n");
-
+    
             if (selectedIndex < requests.length) {
                 String originalRequest = requests[selectedIndex];
+                String[] fields = originalRequest.split("\\n");
+                StringBuilder filteredDetails = new StringBuilder();
+    
+                for (int i = 0; i < fields.length; i++) {
+                    if (i != 0) { 
+                        filteredDetails.append(fields[i]).append("\n");
+                    }
+                }
+    
+                requestDetailsArea.setText(filteredDetails.toString().trim());
                 selectedRequestId = extractRequestId(originalRequest);
             }
         }
     }
     
     @FXML
+    private void performItemSearch() {
+        String itemName = SearchitemNameField.getText().trim();
+        String description = SearchdescriptionField.getText().trim();
+        String building = SearchbuildingField.getValue() != null ? SearchbuildingField.getValue() : "";
+        String category = SearchcategoryField.getValue() != null ? SearchcategoryField.getValue() : "";
+
+        String searchResults = sql_link.itemSearch(itemName, description, building, category);
+
+        logEntries.clear();
+
+        if (searchResults.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No Results");
+            alert.setHeaderText(null);
+            alert.setContentText("No items found matching the search criteria.");
+            alert.show();
+            return;
+        }
+
+        String[] items = searchResults.split("\n");
+        for (String item : items) {
+            String[] fields = item.split(", ");
+            if (fields.length >= 5) {
+                String id = fields[0]; 
+                String itemNameResult = fields[1];
+                String descriptionResult = fields[2];
+                String buildingResult = fields[3];
+                String categoryResult = fields[4];
+                String time = fields.length > 5 ? fields[5] : "N/A";
+
+                ObservableList<String> row = FXCollections.observableArrayList(
+                    itemNameResult, descriptionResult, buildingResult, categoryResult, time
+                );
+                logEntries.add(row);
+            }
+        }
+    }
+
+    
+    
+    @FXML
     private String extractRequestId(String request) {
         String[] fields = request.split("\\n");
         if (fields.length > 0) {
-            return fields[0]; // Assume the object ID is the first line
+            return fields[0]; 
         }
         return null;
     }
