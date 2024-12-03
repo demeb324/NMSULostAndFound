@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.beans.value.ObservableValue;
 
 import static com.Aggie_FindIt.sql_link.*;
 
@@ -20,7 +21,7 @@ public class AdminPageController implements Initializable{
     @FXML
     private TableColumn<ObservableList<String>, String> itemNameColumn, descriptionColumn, buildingColumn, categoryColumn, timeColumn;
     @FXML
-    private Button reloadButton; 
+    private Button reloadButton, removeItem, editItem;
 
     private ObservableList<ObservableList<String>> logEntries = FXCollections.observableArrayList();
 
@@ -79,6 +80,24 @@ public class AdminPageController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        logTableView.getSelectionModel().selectedItemProperty().addListener(
+            (ObservableValue<? extends ObservableList<String>> observable, ObservableList<String> oldValue, ObservableList<String> newValue) -> {
+                if (newValue != null) {
+
+                    populateLogButtons();
+
+                    System.out.println("Selected row: " + newValue);
+                }
+            }
+        );
+
+
+        removeItem.setDisable(true);
+        removeItem.setVisible(false);
+        editItem.setDisable(true);
+        editItem.setVisible(false);
+
         addItem.setOpacity(0);
         itemDescription.setOpacity(0);
         itemColor.setOpacity(0);
@@ -364,6 +383,13 @@ public class AdminPageController implements Initializable{
             return fields[0]; // Assume the object ID is the first line
         }
         return null;
+    }
+
+    private void populateLogButtons() {
+        removeItem.setDisable(false);
+        removeItem.setVisible(true);
+        editItem.setDisable(false);
+        editItem.setVisible(true);
     }
 
 }

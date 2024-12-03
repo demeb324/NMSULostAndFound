@@ -124,7 +124,7 @@
           </content>
         </ScrollPane>
         <AnchorPane>
-          <HBox>
+          <VBox>
           <children>
             <TableView fx:id="logTableView" >
                   <columns>
@@ -136,8 +136,12 @@
                   </columns>
               </TableView>
           </children>
-          <Button fx:id="reloadButton" text="Reload" onAction="#updateLog" />
+          <HBox>
+              <Button fx:id="reloadButton" text="Reload" onAction="#updateLog" />
+              <Button fx:id="editItem" text="Edit" />
+              <Button fx:id="removeItem" text="Remove" />
           </HBox>
+          </VBox>
       </AnchorPane>
       </items>
     </SplitPane>
