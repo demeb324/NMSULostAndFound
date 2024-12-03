@@ -21,7 +21,7 @@ public class AdminPageController implements Initializable{
     @FXML
     private TableColumn<ObservableList<String>, String> itemNameColumn, descriptionColumn, buildingColumn, categoryColumn, timeColumn;
     @FXML
-    private Button reloadButton, removeItem, editItem;
+    private Button reloadButton, removeItem;
 
     private ObservableList<ObservableList<String>> logEntries = FXCollections.observableArrayList();
 
@@ -37,21 +37,11 @@ public class AdminPageController implements Initializable{
     @FXML
     private ComboBox<String> categoryField, SearchcategoryField;
   
-    @FXML
-    private ChoiceBox<String> itemCategory;
-    @FXML
-    private Label itemCategoryLabel, itemDateLabel;
-    @FXML
-    private DatePicker itemDate;
-    @FXML
-    private TextField itemDescription, itemColor, itemSearchName; 
-    @FXML 
-    private Button completeReturn, cancel, addItem,searchButton;
+ 
     @FXML
     private AnchorPane middlePane;
     @FXML
     private TextArea returnText, procedure;
-    private String[] categories = {"Phone", "Tablet", "Computer", "School supply", "Personal Item"};
 
 
     @FXML
@@ -97,23 +87,10 @@ public class AdminPageController implements Initializable{
 
         removeItem.setDisable(true);
         removeItem.setVisible(false);
-        editItem.setDisable(true);
-        editItem.setVisible(false);
 
-        addItem.setOpacity(0);
-        itemDescription.setOpacity(0);
-        itemColor.setOpacity(0);
-        itemCategory.setOpacity(0);
-        itemCategoryLabel.setOpacity(0);
-        itemDate.setOpacity(0);
-        itemDateLabel.setOpacity(0);
-        completeReturn.setOpacity(0);
-        cancel.setOpacity(0);
+        
         returnText.setOpacity(0);
-        itemCategory.getItems().addAll(categories);
 
-        itemSearchName.setOpacity(0);
-        searchButton.setOpacity(0);
         procedure.setOpacity(0);
   
         logTableView.setItems(logEntries);
@@ -231,33 +208,10 @@ public class AdminPageController implements Initializable{
         SearchcategoryField.getSelectionModel().clearSelection();
     }
 
-    @FXML
-    private void addItem() {
-        cancel();
-        itemDescription.setDisable(false);
-        itemDescription.setOpacity(100);
-        itemColor.setDisable(false);
-        itemColor.setOpacity(100);
-        itemCategory.setDisable(false);
-        itemCategory.setOpacity(100);
-        itemCategoryLabel.setDisable(false);
-        itemCategoryLabel.setOpacity(100);
-        itemDate.setDisable(false);
-        itemDate.setOpacity(100);
-        itemDateLabel.setDisable(false);
-        itemDateLabel.setOpacity(100);
-        addItem.setDisable(false);
-        addItem.setOpacity(100);
-        cancel.setDisable(false);
-        cancel.setOpacity(100);
-    }
+    
     @FXML
     private void itemReturn() {
         cancel();
-        completeReturn.setDisable(false);
-        completeReturn.setOpacity(100);
-        cancel.setDisable(false);
-        cancel.setOpacity(100);
         returnText.setDisable(true);
         returnText.setOpacity(100);
         procedure.setOpacity(100);
@@ -265,54 +219,13 @@ public class AdminPageController implements Initializable{
 
     @FXML
     private void cancel() {
-        itemDescription.setDisable(true);
-        itemDescription.setOpacity(0);
-        itemColor.setDisable(true);
-        itemColor.setOpacity(0);
-        itemCategory.setDisable(true);
-        itemCategory.setOpacity(0);
-        itemCategoryLabel.setDisable(true);
-        itemCategoryLabel.setOpacity(0);
-        itemDate.setDisable(true);
-        itemDate.setOpacity(0);
-        itemDateLabel.setDisable(true);
-        itemDateLabel.setOpacity(0);
-        addItem.setDisable(true);
-        addItem.setOpacity(0);
-        completeReturn.setDisable(true);
-        completeReturn.setOpacity(0);
-        cancel.setDisable(true);
-        cancel.setOpacity(0);
         returnText.setDisable(true);
         returnText.setOpacity(0);
-        itemSearchName.setDisable(true);
-        itemSearchName.setOpacity(0);
-        searchButton.setDisable(true);
-        searchButton.setOpacity(0);
         procedure.setOpacity(0);
         itemInputForm.setVisible(false);
         hideRequestInfo();
         itemSearchForm.setVisible(false);
     }
-
-    @FXML
-    private void itemSearch() {
-        cancel();
-        itemDescription.setDisable(false);
-        itemDescription.setOpacity(100);
-        itemCategory.setDisable(false);
-        itemCategory.setOpacity(100);
-        itemCategoryLabel.setDisable(false);
-        itemCategoryLabel.setOpacity(100);
-        cancel.setDisable(false);
-        cancel.setOpacity(100);
-        itemSearchName.setDisable(false);
-        itemSearchName.setOpacity(100);
-        searchButton.setDisable(false);
-        searchButton.setOpacity(100);
-    }
-
-    public void submitItem(){}
 
 
     @FXML
@@ -457,8 +370,6 @@ public class AdminPageController implements Initializable{
     private void populateLogButtons() {
         removeItem.setDisable(false);
         removeItem.setVisible(true);
-        editItem.setDisable(false);
-        editItem.setVisible(true);
     }
 
     @FXML
