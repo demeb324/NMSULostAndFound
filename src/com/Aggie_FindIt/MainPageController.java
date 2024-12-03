@@ -1,6 +1,7 @@
 package com.Aggie_FindIt;
 
 import javafx.fxml.FXML;
+import static com.Aggie_FindIt.sql_link.deleteOldItems;
 
 public class MainPageController {
 
@@ -8,6 +9,7 @@ public class MainPageController {
     private void openLoginPage() {
         System.out.println("openLoginPage method called");
         Aggie_FindIt.loadPage("Login.fxml");
+        sql_link.deleteOldItems();
     }
 
     @FXML
