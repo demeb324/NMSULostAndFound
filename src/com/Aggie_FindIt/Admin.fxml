@@ -85,12 +85,17 @@
                       <ComboBox fx:id="buildingField">
                           <items>
                               <FXCollections fx:factory="observableArrayList">
-                                  <String fx:value="Library"/>
-                                  <String fx:value="Cafeteria"/>
-                                  <String fx:value="Gym"/>
-                                  <String fx:value="Classroom"/>
-                                  <String fx:value="Dormitory"/>
-                                  <String fx:value="Other"/>
+                                  <String fx:value="Zhul Library"/>
+                                  <String fx:value="Corbett Center Student Union"/>
+                                  <String fx:value="Activity Center"/>
+                                  <String fx:value="Science Hall"/>
+                                  <String fx:value="Hardman and Jacobs Undergraduate Learning Center"/>
+                                  <String fx:value="Branson Library"/>
+                                  <String fx:value="Foster Hall"/>
+                                  <String fx:value="Frenger Food Court"/>
+                                  <String fx:value="Domenici Hall"/>
+                                  <String fx:value="Breland Hall"/>
+                                  <String fx:value="Others"/>
                               </FXCollections>
                           </items>
                       </ComboBox>
