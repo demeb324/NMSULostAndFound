@@ -71,6 +71,8 @@ public class AdminPageController implements Initializable{
 
     private String selectedRequestId;
 
+    private ObservableList<String> currentRowSelected;
+
 
     @FXML
     private void logout() {
@@ -84,7 +86,7 @@ public class AdminPageController implements Initializable{
         logTableView.getSelectionModel().selectedItemProperty().addListener(
             (ObservableValue<? extends ObservableList<String>> observable, ObservableList<String> oldValue, ObservableList<String> newValue) -> {
                 if (newValue != null) {
-
+                    currentRowSelected = newValue;
                     populateLogButtons();
 
                     System.out.println("Selected row: " + newValue);
@@ -158,6 +160,7 @@ public class AdminPageController implements Initializable{
     private void showItemInputForm() {
         cancel();
         itemInputForm.setVisible(true);
+        itemInputForm.setDisable(false);
     }
 
     @FXML
@@ -165,6 +168,7 @@ public class AdminPageController implements Initializable{
         // Hide the form and clear the fields
         clearItemInputForm();
         itemInputForm.setVisible(false);
+        itemInputForm.setDisable(true);
     }
 
     @FXML
@@ -191,14 +195,16 @@ public class AdminPageController implements Initializable{
             alert.setHeaderText(null);
             alert.setContentText("Item added successfully!");
             alert.show();
-            clearItemInputForm();
-            itemInputForm.setVisible(false);
+            updateLog();
         } else {
             alert.setTitle("Failure");
             alert.setHeaderText(null);
             alert.setContentText("Failed to add item. Please try again.");
             alert.show();
         }
+
+        handleCancelItemInput();
+        
     }
 
     private void clearItemInputForm() {
@@ -286,8 +292,7 @@ public class AdminPageController implements Initializable{
         searchButton.setOpacity(100);
     }
 
-    @FXML
-    private void submitItem() {}
+    public void submitItem(){}
 
 
     @FXML
@@ -377,6 +382,7 @@ public class AdminPageController implements Initializable{
         }
     }
     
+    @FXML
     private String extractRequestId(String request) {
         String[] fields = request.split("\\n");
         if (fields.length > 0) {
@@ -385,11 +391,19 @@ public class AdminPageController implements Initializable{
         return null;
     }
 
+    @FXML
     private void populateLogButtons() {
         removeItem.setDisable(false);
         removeItem.setVisible(true);
         editItem.setDisable(false);
         editItem.setVisible(true);
+    }
+
+    @FXML
+    private void removeItemButton() {
+        String item = sql_link.itemSearch(currentRowSelected.get(0), currentRowSelected.get(1), currentRowSelected.get(2), currentRowSelected.get(3));
+        System.out.println(sql_link.removeItem(item.strip().split(", ")[0].strip()));
+        updateLog();
     }
 
 }

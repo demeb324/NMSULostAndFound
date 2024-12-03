@@ -19,6 +19,8 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.result.DeleteResult;
+
 
 public class sql_link{
 
@@ -103,6 +105,7 @@ public class sql_link{
                 result.append(item.getString("category")).append(", ");
                 result.append(item.getDate("time")).append("\n");
             }
+            
             return result.toString();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -170,13 +173,19 @@ public class sql_link{
         try (MongoClient mongoClient = createConnection()) {
             MongoDatabase db = mongoClient.getDatabase("CS371");
             MongoCollection<Document> items = db.getCollection("Items");
-
-            items.deleteOne(Filters.eq("item_id", item_id));
-            return true;
+    
+            DeleteResult result = items.deleteOne(Filters.eq("_id", new ObjectId(item_id)));
+            System.out.println("Deleted count: " + result.getDeletedCount());
+    
+            return result.getDeletedCount() > 0;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
+    
+    
+    
 
     public static boolean editItem(String item_id, String item_name, String description, String building, String category) {
         try (MongoClient mongoClient = createConnection()) {
