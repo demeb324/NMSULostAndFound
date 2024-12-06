@@ -23,7 +23,7 @@ TO compile and run, in your command prompt, go into the src folder directory and
 - Rupak Dey
 - Mario Saenz
 - Benjamin Widner III
-- Dimitreus Billey
+- Demetrius Billey
 
 
 
